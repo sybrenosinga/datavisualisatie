@@ -1,0 +1,10 @@
+from bs4 import BeautifulSoup
+import pandas as pd
+
+soup = BeautifulSoup(open('./ranking_table', 'rb'), 'html.parser')
+
+df = pd.DataFrame([[A.get_text(), B.get_text(), C.get_text(), D.get_text(), E.get_text(), F.get_text()] for A, B, C, D, E, F in soup.findAll('tr')[1:]], columns=['Rank', 'Name', 'FTE Student', 'Students per Staff', 'International Students', 'Female:Male Ratio'])
+
+# print(df.loc[df[colname] == 'n/a'])
+
+print(df)
