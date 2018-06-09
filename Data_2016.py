@@ -2,6 +2,8 @@
 comments 2016 data:
     apply_link not present
     rank_order in steps of 1, not steps of 10
+    800 universities, instead of 1103
+    nid of unis same as 2018
 '''
 
 import pandas as pd
