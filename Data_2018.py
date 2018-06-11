@@ -4,7 +4,8 @@ import requests
 import math
 
 # Get json data
-file = requests.get('https://www.timeshighereducation.com/sites/default/files/the_data_rankings/world_university_rankings_2017_limit0_94aa8e595206a1cd1284e2808330a79c.json').text
+# file = requests.get('https://www.timeshighereducation.com/sites/default/files/the_data_rankings/world_university_rankings_2017_limit0_94aa8e595206a1cd1284e2808330a79c.json').text
+file = str(open('./Data_json/overall_2018.json.txt', 'r'))
 data = json.loads(file)
 
 # Put data in data frame and drop irrelevant columns
