@@ -4,11 +4,11 @@ import requests
 import math
 
 # Get json data
-file = requests.get('https://www.timeshighereducation.com/sites/default/files/the_data_rankings/world_university_rankings_2018_limit0_369a9045a203e176392b9fb8f8c1cb2a.json').text
+file = requests.get('https://www.timeshighereducation.com/sites/default/files/the_data_rankings/world_university_rankings_2017_limit0_94aa8e595206a1cd1284e2808330a79c.json').text
 data = json.loads(file)
 
 # Put data in data frame and drop irrelevant columns
-df = pd.DataFrame(data['data']).drop(['apply_link', 'aliases', 'member_level', 'record_type', 'scores_overall_rank'], axis=1)
+df = pd.DataFrame(data['data']).drop(['aliases', 'member_level', 'record_type', 'scores_overall_rank'], axis=1)
 
 # Change Female:Male ratio to percentage Male
 df = df.rename({'stats_female_male_ratio':'percentage_male'}, axis=1)
