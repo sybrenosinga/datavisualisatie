@@ -1,11 +1,18 @@
+'''
+
+Run file with 'bokeh serve --show ranks_through_years.py'
+
+'''
+
 import pandas
 import math
+import itertools
+import bokeh.palettes
 from bokeh.plotting import figure
-from bokeh.io import output_file, show, curdoc
-from bokeh.layouts import widgetbox, row
-from bokeh.models.widgets import MultiSelect, Button, TextInput, Slider
-from bokeh.models import ColumnDataSource
-import numpy as np
+from bokeh.io import show, curdoc
+from bokeh.layouts import column, widgetbox
+from bokeh.models.widgets import MultiSelect, TextInput
+from bokeh.models import ColumnDataSource, CustomJS
 
 
 def check_empty(row, df1, df2=0):
@@ -16,6 +23,7 @@ def check_empty(row, df1, df2=0):
         if df1[df1['nid'] == row['nid']]['rank_order'].empty:
             return False
     return True
+
 
 df_2011 = pandas.read_csv('./Data_csv/data_2011.csv')
 df_2012 = pandas.read_csv('./Data_csv/data_2012.csv')
@@ -33,93 +41,53 @@ df = pandas.DataFrame([[row['name'], row['location'], row['rank_order'] if check
                                     df_2015[df_2015['nid'] == row['nid']]['rank_order'].iloc[0] if check_empty(row, df_2015) else math.nan,
                                     df_2016[df_2016['nid'] == row['nid']]['rank_order'].iloc[0] if check_empty(row, df_2016) else math.nan,
                                     df_2017[df_2017['nid'] == row['nid']]['rank_order'].iloc[0] if check_empty(row, df_2017) else math.nan,
-                                    df_2017[df_2017['nid'] == row['nid']]['rank_order'].iloc[0] if check_empty(row, df_2018) else math.nan]
+                                    df_2018[df_2018['nid'] == row['nid']]['rank_order'].iloc[0] if check_empty(row, df_2018) else math.nan]
                         for i, row in df_2011.iterrows()], columns=['name', 'location', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'])
 
 dfT = df.transpose()
-# for i in range(len(dfT.columns.tolist())):
-#     print(dfT[dfT.columns[i]])
 
-# print(dfT[dfT.columns[157]][2:10])
+# Prepare some data
+y = [dfT[dfT.columns[165]][2:10]]
+x = ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018']
+legend = ['University of Amsterdam']
+color = [bokeh.palettes.Category20[20][0]]
 
-# # Prepare some data
-# y = dfT[dfT.columns[157]][2:10]
-# x = ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018']
-#
-#
-# # Create a figure object
-# f = figure(x_range=x, y_range=(500, 0), title='kaas')
-#
-# # Create line plot
-# source = ColumnDataSource(data=dict(x=x, y=y))
-#
-# f.line('x', 'y', source=source)
-#
-#
-# def something(attr, old, new):
-#     f.title.text = text.value
-#
-# text = TextInput(title="title", value='my sine wave')
-#
-# button = Button(label="Foo", button_type="success")
-#
-# inputs = widgetbox(text, button)
-#
-# text.on_change('value', something)
-#
-# layout = row(inputs, f)
-#
-# show(layout)
+# Create a figure object
+f = figure(x_range=x, y_range=(500, 0), title='University ranking per year', x_axis_label='Year', y_axis_label='Rank')
 
-# Set up data
-N = 200
-x = np.linspace(0, 4*np.pi, N)
-y = np.sin(x)
-source = ColumnDataSource(data=dict(x=x, y=y))
+# Create line plot
+source = ColumnDataSource(data=dict(x=[x], y=y, legend=[legend], color=[color]))
+
+lines = f.multi_line(xs='x', ys='y', legend='legend', color='color', source=source, line_width=5)
 
 
-# Set up plot
-plot = figure(plot_height=400, plot_width=400, title="my sine wave",
-              tools="crosshair,pan,reset,save,wheel_zoom",
-              x_range=[0, 4*np.pi], y_range=[-2.5, 2.5])
-
-plot.line('x', 'y', source=source, line_width=3, line_alpha=0.6)
-
-
-# Set up widgets
-text = TextInput(title="title", value='my sine wave')
-offset = Slider(title="offset", value=0.0, start=-5.0, end=5.0, step=0.1)
-amplitude = Slider(title="amplitude", value=1.0, start=-5.0, end=5.0, step=0.1)
-phase = Slider(title="phase", value=0.0, start=0.0, end=2*np.pi)
-freq = Slider(title="frequency", value=1.0, start=0.1, end=5.1, step=0.1)
+def something(attr, old, new):
+    color_list = []
+    for i in itertools.cycle(bokeh.palettes.Category20[20]):
+        if len(color_list) == len(multi_select.value):
+            break
+        color_list += [i]
+    source.data = dict(x=[x for _ in range(len(multi_select.value))],
+                       y=[dfT[dfT.columns[df.index[df['name'] == uni][0]]][2:10] for uni in multi_select.value],
+                       legend=[uni for uni in multi_select.value],
+                       color=color_list)
 
 
-# Set up callbacks
-def update_title(attrname, old, new):
-    plot.title.text = text.value
+ds = ColumnDataSource(data=dict(options=[dfT[dfT.columns[x]]['name'] for x in dfT[dfT.columns]]))
 
-text.on_change('value', update_title)
+multi_select = MultiSelect(title="University: (hold ctrl to select multiple)", value=['0'],
+                           options=ds.data['options'])
 
-def update_data(attrname, old, new):
+ti = TextInput(placeholder='Search University',
+               callback=CustomJS(args=dict(ds=ds, s=multi_select),
+                                 code="s.options = ds.data['options'].filter(i => i.toLowerCase().includes(cb_obj.value.toLowerCase()));"))
 
-    # Get the current slider values
-    a = amplitude.value
-    b = offset.value
-    w = phase.value
-    k = freq.value
+multi_select.on_change('value', something)
 
-    # Generate the new curve
-    x = np.linspace(0, 4*np.pi, N)
-    y = a*np.sin(k*x + w) + b
+f.legend.location = 'bottom_right'
 
-    source.data = dict(x=x, y=y)
+curdoc().add_root(column(f, widgetbox(multi_select, ti)))
+curdoc().title = "test"
 
-for w in [offset, amplitude, phase, freq]:
-    w.on_change('value', update_data)
+show(column(f, widgetbox(multi_select, ti)))
 
-
-# Set up layouts and add to document
-inputs = widgetbox(text, offset, amplitude, phase, freq)
-
-curdoc().add_root(row(inputs, plot, width=800))
-curdoc().title = "Sliders"
