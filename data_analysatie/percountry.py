@@ -45,7 +45,7 @@ for i in getal*100:
     percentage_in_top.append(int(i))
 
 # maak plotje
-output_file('/home/judithcorsel/hoi/test/percountry.html')
+output_file('./data_analysatie/percountry.html')
 
 xas=df18['location'].unique()
 yas=percentage_in_top
