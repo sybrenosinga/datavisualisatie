@@ -5,89 +5,111 @@ Run file with 'bokeh serve --show ranks_through_years.py'
 '''
 
 import pandas
-import math
 import itertools
 import bokeh.palettes
 from bokeh.plotting import figure
 from bokeh.io import show, curdoc
-from bokeh.layouts import column, widgetbox
+from bokeh.layouts import column, row, widgetbox
 from bokeh.models.widgets import MultiSelect, TextInput
-from bokeh.models import ColumnDataSource, CustomJS
+from bokeh.models import ColumnDataSource, CustomJS, HoverTool
 
-
-def check_empty(row, df1, df2=0):
-    if not df2 == 0:
-        if df1[df1['nid'] == row['nid']]['rank_order'].empty or df2[df2['nid'] == row['nid']]['rank_order'].empty:
-            return False
-    else:
-        if df1[df1['nid'] == row['nid']]['rank_order'].empty:
-            return False
-    return True
-
-
-df_2011 = pandas.read_csv('./Data_csv/data_2011.csv')
-df_2012 = pandas.read_csv('./Data_csv/data_2012.csv')
-df_2013 = pandas.read_csv('./Data_csv/data_2013.csv')
-df_2014 = pandas.read_csv('./Data_csv/data_2014.csv')
-df_2015 = pandas.read_csv('./Data_csv/data_2015.csv')
-df_2016 = pandas.read_csv('./Data_csv/data_2016.csv')
-df_2017 = pandas.read_csv('./Data_csv/data_2017.csv')
-df_2018 = pandas.read_csv('./Data_csv/data_2018.csv')
-
-df = pandas.DataFrame([[row['name'], row['location'], row['rank_order'] if check_empty(row, df_2011) else math.nan,
-                                    df_2012[df_2012['nid'] == row['nid']]['rank_order'].iloc[0] if check_empty(row, df_2012) else math.nan,
-                                    df_2013[df_2013['nid'] == row['nid']]['rank_order'].iloc[0] if check_empty(row, df_2013) else math.nan,
-                                    df_2014[df_2014['nid'] == row['nid']]['rank_order'].iloc[0] if check_empty(row, df_2014) else math.nan,
-                                    df_2015[df_2015['nid'] == row['nid']]['rank_order'].iloc[0] if check_empty(row, df_2015) else math.nan,
-                                    df_2016[df_2016['nid'] == row['nid']]['rank_order'].iloc[0] if check_empty(row, df_2016) else math.nan,
-                                    df_2017[df_2017['nid'] == row['nid']]['rank_order'].iloc[0] if check_empty(row, df_2017) else math.nan,
-                                    df_2018[df_2018['nid'] == row['nid']]['rank_order'].iloc[0] if check_empty(row, df_2018) else math.nan]
-                        for i, row in df_2011.iterrows()], columns=['name', 'location', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'])
-
-dfT = df.transpose()
-
-# Prepare some data
-y = [dfT[dfT.columns[165]][2:10]]
-x = ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018']
-legend = ['University of Amsterdam']
-color = [bokeh.palettes.Category20[20][0]]
-
-# Create a figure object
-f = figure(x_range=x, y_range=(500, 0), title='University ranking per year', x_axis_label='Year', y_axis_label='Rank')
-
-# Create line plot
-source = ColumnDataSource(data=dict(x=[x], y=y, legend=[legend], color=[color]))
-
-lines = f.multi_line(xs='x', ys='y', legend='legend', color='color', source=source, line_width=5)
-
-
-def something(attr, old, new):
+def update_source(attr, old, new):
     color_list = []
     for i in itertools.cycle(bokeh.palettes.Category20[20]):
         if len(color_list) == len(multi_select.value):
             break
         color_list += [i]
     source.data = dict(x=[x for _ in range(len(multi_select.value))],
-                       y=[dfT[dfT.columns[df.index[df['name'] == uni][0]]][2:10] for uni in multi_select.value],
+                       y_all=[dfT_all[dfT_all.columns[df_all.index[df_all['name'] == uni][0]]][2:10] for uni in multi_select.value],
+                       y_citations=[dfT_citations[dfT_citations.columns[df_citations.index[df_citations['name'] == uni][0]]][2:10] for uni in multi_select.value],
+                       y_industry=[dfT_industry[dfT_industry.columns[df_industry.index[df_industry['name'] == uni][0]]][2:10] for uni in multi_select.value],
+                       y_international=[dfT_international[dfT_international.columns[df_international.index[df_international['name'] == uni][0]]][2:10] for uni in multi_select.value],
+                       y_research=[dfT_research[dfT_research.columns[df_research.index[df_research['name'] == uni][0]]][2:10] for uni in multi_select.value],
+                       y_teaching=[dfT_teaching[dfT_teaching.columns[df_teaching.index[df_teaching['name'] == uni][0]]][2:10] for uni in multi_select.value],
                        legend=[uni for uni in multi_select.value],
-                       color=color_list)
+                       color=color_list,
+                       location=[df_all[df_all['name'] == uni]['location'] for uni in multi_select.value])
+
+# Open data and create dataframes + transposes
+df_all = pandas.DataFrame.from_csv('./Data_csv/rank_order.csv')
+dfT_all = df_all.transpose()
+df_citations = pandas.DataFrame.from_csv('./Data_csv/citations_rank.csv')
+dfT_citations = df_citations.transpose()
+df_industry = pandas.DataFrame.from_csv('./Data_csv/industry_income_rank.csv')
+dfT_industry = df_industry.transpose()
+df_international = pandas.DataFrame.from_csv('./Data_csv/international_outlook_rank.csv')
+dfT_international = df_international.transpose()
+df_research = pandas.DataFrame.from_csv('./Data_csv/research_rank.csv')
+dfT_research = df_research.transpose()
+df_teaching = pandas.DataFrame.from_csv('./Data_csv/teaching_rank.csv')
+dfT_teaching = df_teaching.transpose()
+
+# Prepare some data
+y_all = [dfT_all[dfT_all.columns[165]][2:10]]
+y_citations = [dfT_citations[dfT_citations.columns[165]][2:10]]
+y_industry = [dfT_industry[dfT_industry.columns[165]][2:10]]
+y_international = [dfT_international[dfT_international.columns[165]][2:10]]
+y_research = [dfT_research[dfT_research.columns[165]][2:10]]
+y_teaching = [dfT_teaching[dfT_teaching.columns[165]][2:10]]
+x = ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018']
+legend = ['University of Amsterdam']
+color = [bokeh.palettes.Category20[20][0]]
+location = ['Netherlands']
+
+# Create a figure object
+f_all = figure(x_range=x, y_range=(500, 0), title='University ranking per year', x_axis_label='Year', y_axis_label='Rank')
+f_citations = figure(x_range=x, y_range=(500, 0), title='University citations ranking per year', x_axis_label='Year', y_axis_label='Rank')
+f_industry = figure(x_range=x, y_range=(500, 0), title='University industry income ranking per year', x_axis_label='Year', y_axis_label='Rank')
+f_international = figure(x_range=x, y_range=(500, 0), title='University international outlook per year', x_axis_label='Year', y_axis_label='Rank')
+f_research = figure(x_range=x, y_range=(500, 0), title='University research ranking per year', x_axis_label='Year', y_axis_label='Rank')
+f_teaching = figure(x_range=x, y_range=(500, 0), title='University teaching ranking per year', x_axis_label='Year', y_axis_label='Rank')
 
 
-ds = ColumnDataSource(data=dict(options=[dfT[dfT.columns[x]]['name'] for x in dfT[dfT.columns]]))
+# Create line plot
+source = ColumnDataSource(data=dict(x=[x], y_all=y_all, y_citations=y_citations, y_industry=y_industry, y_international=y_international, y_research=y_research, y_teaching=y_teaching, legend=[legend], color=[color], location=[location]))
+
+f_all.multi_line(xs='x', ys='y_all', color='color', source=source, line_width=5)
+f_citations.multi_line(xs='x', ys='y_citations', color='color', source=source, line_width=5)
+f_industry.multi_line(xs='x', ys='y_industry', color='color', source=source, line_width=5)
+f_international.multi_line(xs='x', ys='y_international', color='color', source=source, line_width=5)
+f_research.multi_line(xs='x', ys='y_research', color='color', source=source, line_width=5)
+f_teaching.multi_line(xs='x', ys='y_teaching', color='color', source=source, line_width=5)
+
+ds = ColumnDataSource(data=dict(options=[dfT_all[dfT_all.columns[x]]['name'] for x in dfT_all[dfT_all.columns]]))
 
 multi_select = MultiSelect(title="University: (hold ctrl to select multiple)", value=['0'],
-                           options=ds.data['options'])
+                           options=ds.data['options'], size=10)
 
 ti = TextInput(placeholder='Search University',
                callback=CustomJS(args=dict(ds=ds, s=multi_select),
                                  code="s.options = ds.data['options'].filter(i => i.toLowerCase().includes(cb_obj.value.toLowerCase()));"))
 
-multi_select.on_change('value', something)
+f_all.add_tools(HoverTool(show_arrow=False, line_policy='next', tooltips=[('name', '@legend'), ('location', '@location')]))
+f_citations.add_tools(HoverTool(show_arrow=False, line_policy='next', tooltips=[('name', '@legend'), ('location', '@location')]))
+f_industry.add_tools(HoverTool(show_arrow=False, line_policy='next', tooltips=[('name', '@legend'), ('location', '@location')]))
+f_international.add_tools(HoverTool(show_arrow=False, line_policy='next', tooltips=[('name', '@legend'), ('location', '@location')]))
+f_research.add_tools(HoverTool(show_arrow=False, line_policy='next', tooltips=[('name', '@legend'), ('location', '@location')]))
+f_teaching.add_tools(HoverTool(show_arrow=False, line_policy='next', tooltips=[('name', '@legend'), ('location', '@location')]))
 
-f.legend.location = 'bottom_right'
 
-curdoc().add_root(column(f, widgetbox(multi_select, ti)))
-curdoc().title = "test"
+multi_select.on_change('value', update_source)
 
-show(column(f, widgetbox(multi_select, ti)))
+f_all.legend.location = 'bottom_right'
+
+f_citations.plot_height = 300
+f_citations.plot_width = 300
+f_industry.plot_height = 300
+f_industry.plot_width = 300
+f_international.plot_height = 300
+f_international.plot_width = 300
+f_research.plot_height = 300
+f_research.plot_width = 300
+f_teaching.plot_height = 300
+f_teaching.plot_width = 300
+
+curdoc().add_root(row(column(f_all, widgetbox(multi_select, ti)), column(f_citations, f_industry), column(f_international, f_research), f_teaching))
+curdoc().title = "University rankings through years"
+
+show(row(column(f_all, widgetbox(multi_select, ti)), column(f_citations, f_industry), column(f_international, f_research), f_teaching))
+
 
