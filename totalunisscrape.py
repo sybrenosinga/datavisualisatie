@@ -21,7 +21,6 @@ tudf = tudf.assign(universities = unis)
 tudf.set_value(0, 'countries', 'United States')
 tudf.set_value(31, 'countries', 'Czech Republic')
 tudf.set_value(35, 'countries', 'Russian Federation')
-tudf.set_value(59, 'countries', 'Northern Cyprus')
 
 # return csv
 tudf.to_csv('./Data_csv/all_universities.csv')
