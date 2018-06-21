@@ -19,7 +19,7 @@ df18 = pd.read_csv('./Data_csv/data_2018.csv')
 
 # compare student staff ratio and overall rank
     # want meer leraren is wellicht beter onderwijs?
-    
+
 country = df18['location']
 rank = df18['rank_order']
 studentstaff = df18['stats_student_staff_ratio']
