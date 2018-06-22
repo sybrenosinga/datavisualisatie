@@ -7,6 +7,7 @@ import numpy as np
 from bokeh.plotting import figure
 from bokeh.io import output_file, show
 from bokeh.models import DataRange1d
+from bokeh.layouts import gridplot
 
 import pandas
 
@@ -82,29 +83,25 @@ print(unidb)
 # maak plotje
 output_file('./data_analysatie/percountry.html')
 
-unidb_sorted = unidb.sort_values(by=['pc'])
+unidb_sorted = unidb.sort_values(by=['pc'], ascending = False)
 
 # print(unidb_sorted['country'])
 xas=unidb_sorted.country.unique()
 yas=unidb_sorted['pc']
 yas_smooth=unidb_sorted['pc_smooth']
 
-p = figure(x_range=xas, plot_width=1800 ,title="landjes")
+p = figure(x_range=xas, plot_width=1800, plot_height = 500,title="amount of universities in top 1000 / amount of universites in total")
 p.vbar(x=xas, top=yas, width=0.9)
 
 p.xgrid.grid_line_color = 'lightgrey'
 p.xaxis.major_label_orientation = 1
 p.y_range.start = 0
 
-show(p)
-
-output_file('./data_analysatie/percountry1.html')
-
-f = figure(x_range=xas, plot_width=1800 ,title="landjes")
+f = figure(x_range=xas, plot_width=1800 , plot_height = 500,title="amount of universities in top 1000 / amount of universites in total + 1")
 f.vbar(x=xas, top=yas_smooth, width=0.9)
 
 f.xgrid.grid_line_color = 'lightgrey'
 f.xaxis.major_label_orientation = 1
 f.y_range.start = 0
 
-show(f)
+show(gridplot([[p],[f]]))
