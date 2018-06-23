@@ -17,23 +17,23 @@ df16 = pd.read_csv('../Data_csv/data_2016.csv')
 df17 = pd.read_csv('../Data_csv/data_2017.csv')
 df18 = pd.read_csv('../Data_csv/data_2018.csv')
 
-# compare student staff ratio and overall rank
-    # want meer leraren is wellicht beter onderwijs?
-    
-country = df18['location']
-rank = df18['rank_order']
-studentstaff = df18['stats_student_staff_ratio']
+# compare international students and rank
+    # want trekt een betere uni meer internationale mensen aan?
 
-output_file("cratio_vs_rank.html")
+output_file("outlook_vs_industry_income.html")
 
+# values
+outlook = df18['scores_international_outlook']
+income = df18['scores_international_income']
+
+# Create a figure
 f = figure()
 
 # Axes
-f.xaxis.axis_label="rank"
-f.yaxis.axis_label="student staff ratio"
+f.xaxis.axis_label="score research"
+f.yaxis.axis_label="score citations"
 
-f.y_range=DataRange1d(start=0, end=150)
 
 # Plot the line
-f.circle(rank, studentstaff)
+f.circle(research, citations)
 show(f)

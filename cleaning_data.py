@@ -37,6 +37,7 @@ def file_to_dataframe(file):
                 df['percentage_male'][i] = mean_df[mean_df['location'] == row['location']]['mean'].values[0]
     return df
 
+
 file_to_dataframe(open('./Data_json/overall_2018.json')).to_csv('./Data_csv/data_2018.csv')
 file_to_dataframe(open('./Data_json/overall_2017.json')).to_csv('./Data_csv/data_2017.csv')
 file_to_dataframe(open('./Data_json/overall_2016.json')).to_csv('./Data_csv/data_2016.csv')
