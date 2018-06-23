@@ -1,9 +1,13 @@
+# zorgen dat je  op land kan klikken
+# zorgen dat percentages goed zijn
+
 import pandas as pd
 import numpy as np
 
 from bokeh.plotting import figure
 from bokeh.io import output_file, show
 from bokeh.models import DataRange1d
+from bokeh.layouts import gridplot
 
 import pandas
 
@@ -21,41 +25,83 @@ df18 = pd.read_csv('./Data_csv/data_2018.csv')
 alles = pd.read_csv('./Data_csv/all_universities.csv')
 
 #  landen en unis in de top 1000
-top = df18['location'].value_counts()
+hoi = df18[df18.location != 'Northern Cyprus']
+top = hoi['location'].value_counts()
+
+# print(hoi)
 
 # landen en alle unis, met de landen in de zelfde volgorde als top
 all_unis = []
-for i in df18['location'].unique():
+some_unis = []
+# print(hoi['location'].unique())
+for i in hoi['location'].unique():
+    # all unis
     koelheid = alles['countries'] == i
     uni = alles[koelheid]
     if i == 'United States':
         all_unis.append(3281)
-    for j in uni['universities']:
-        all_unis.append(j)
+    else:
+        for j in uni['universities']:
+            all_unis.append(j)
+
+    # some unis
+    yoyo = hoi['location']== i
+    lkj = yoyo.value_counts()
+    some_unis.append(lkj[True])
 
 
 # definieer voor numpy
 array_all_unis = np.asarray(all_unis)
-array_top = np.asarray(top)
+array_top = np.asarray(some_unis)
 
 # bereken percentage en rond af op een heel getal
 percentage_in_top = []
 getal = np.divide(array_top, array_all_unis)
 for i in getal*100:
-    percentage_in_top.append(int(i))
+    percentage_in_top.append(i)
+
+pc_in_top_smooth = []
+array_all_unis_smooth = array_all_unis + 1
+getal = np.divide(array_top,array_all_unis_smooth)
+for i in getal*100:
+    pc_in_top_smooth.append(i)
+
+
+sorted_pc = np.sort(percentage_in_top)
+sorted_pc_smooth = np.sort(pc_in_top_smooth)
+# print(sorted_pc)
+
+unidb= pd.DataFrame()
+unidb['country'] = hoi['location'].unique()
+unidb = unidb.assign(pc = percentage_in_top)
+unidb = unidb.assign(some = some_unis)
+unidb = unidb.assign(all = all_unis)
+unidb = unidb.assign(pc_smooth = pc_in_top_smooth)
+
+print(unidb)
 
 # maak plotje
 output_file('./data_analysatie/percountry.html')
 
-xas=df18['location'].unique()
-yas=percentage_in_top
-print(xas)
-print(yas)
+unidb_sorted = unidb.sort_values(by=['pc'], ascending = False)
 
-p = figure(x_range=xas, title="landjes")
-p.vbar(x=xas, top=percentage_in_top, width=0.9)
+# print(unidb_sorted['country'])
+xas=unidb_sorted.country.unique()
+yas=unidb_sorted['pc']
+yas_smooth=unidb_sorted['pc_smooth']
 
-p.xgrid.grid_line_color = None
+p = figure(x_range=xas, plot_width=1800, plot_height = 500,title="amount of universities in top 1000 / amount of universites in total")
+p.vbar(x=xas, top=yas, width=0.9)
+
+p.xgrid.grid_line_color = 'lightgrey'
+p.xaxis.major_label_orientation = 1
 p.y_range.start = 0
 
-show(p)
+f = figure(x_range=xas, plot_width=1800 , plot_height = 500,title="amount of universities in top 1000 / amount of universites in total + 1")
+f.vbar(x=xas, top=yas_smooth, width=0.9)
+
+f.xgrid.grid_line_color = 'lightgrey'
+f.xaxis.major_label_orientation = 1
+f.y_range.start = 0
+
+show(gridplot([[p],[f]]))

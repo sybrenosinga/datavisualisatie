@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Bokeh Plot</title>
+        
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.16.min.css" type="text/css" />
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.16.min.css" type="text/css" />
+        
+<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.16.min.js"></script>
+<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.16.min.js"></script>
+<script type="text/javascript">
+    Bokeh.set_log_level("info");
+</script>
+    </head>
+    <body>
+        
+        <div class="bk-root">
+            <div class="bk-plotdiv" id="3e07a90d-ef87-4d6d-98ea-8af9687538d1"></div>
+        </div>
+        
+        <script type="application/json" id="8a599949-252e-4b51-8ec6-6893d779d83c">
+          {"e18f501f-418f-4975-8e57-79d6cc29031f":{"roots":{"references":[{"attributes":{"children":[{"id":"97265e73-e16f-437c-bd47-cca18e54b521","type":"MultiSelect"}]},"id":"60b27b65-01cb-41d2-92c8-770c4e7ea4d2","type":"WidgetBox"},{"attributes":{"callback":null,"options":["United Kingdom","United States","Switzerland","Singapore","Canada","China","Australia","Germany","Sweden","Hong Kong","Japan","Belgium","Netherlands","France","South Korea","Finland","Denmark","Ireland","Spain","Norway","Italy","Austria","South Africa","Luxembourg","New Zealand","Russian Federation","Taiwan","Israel","Iceland","Saudi Arabia","India","Brazil","Iran","United Arab Emirates","Turkey","Estonia","Greece","Cyprus","Macao","Malaysia","Czech Republic","Jordan","Uganda","Qatar","Pakistan","Hungary","Lebanon","Portugal","Chile","Thailand","Colombia","Croatia","Poland","Egypt","Romania","Slovakia","Northern Cyprus","Kuwait","Slovenia","Mexico","Philippines","Peru","Lithuania","Indonesia","Belarus","Venezuela","Sri Lanka","Costa Rica","Ghana","Nigeria","Latvia","Morocco","Kenya","Argentina","Oman","Ukraine","Algeria","Bangladesh","Georgia","Tunisia","Bulgaria"],"size":7,"title":"Country:","value":["Netherlands"]},"id":"97265e73-e16f-437c-bd47-cca18e54b521","type":"MultiSelect"}],"root_ids":["60b27b65-01cb-41d2-92c8-770c4e7ea4d2"]},"title":"Bokeh Application","version":"0.12.16"}}
+        </script>
+        <script type="text/javascript">
+          (function() {
+            var fn = function() {
+              Bokeh.safely(function() {
+                (function(root) {
+                  function embed_document(root) {
+                    
+                  var docs_json = document.getElementById('8a599949-252e-4b51-8ec6-6893d779d83c').textContent;
+                  var render_items = [{"docid":"e18f501f-418f-4975-8e57-79d6cc29031f","elementid":"3e07a90d-ef87-4d6d-98ea-8af9687538d1","modelid":"60b27b65-01cb-41d2-92c8-770c4e7ea4d2"}];
+                  root.Bokeh.embed.embed_items(docs_json, render_items);
+                
+                  }
+                  if (root.Bokeh !== undefined) {
+                    embed_document(root);
+                  } else {
+                    var attempts = 0;
+                    var timer = setInterval(function(root) {
+                      if (root.Bokeh !== undefined) {
+                        embed_document(root);
+                        clearInterval(timer);
+                      }
+                      attempts++;
+                      if (attempts > 100) {
+                        console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing")
+                        clearInterval(timer);
+                      }
+                    }, 10, root)
+                  }
+                })(window);
+              });
+            };
+            if (document.readyState != "loading") fn();
+            else document.addEventListener("DOMContentLoaded", fn);
+          })();
+        </script>
+    </body>
+</html>
