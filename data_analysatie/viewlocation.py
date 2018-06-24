@@ -8,6 +8,7 @@ from bokeh.io import output_file, show, curdoc
 from bokeh.models import DataRange1d
 from bokeh.layouts import column, widgetbox, gridplot
 from bokeh.models.widgets import MultiSelect, Paragraph
+from bokeh.palettes import Spectral6
 
 import pandas
 
@@ -26,7 +27,7 @@ def update(attrname, old, new):
     myString = ''
     color_list = []
 
-    for i in multi_select.value:
+    for j,i in zip(bokeh.palettes.Spectral6,multi_select.value):
 
         country = df18['location'] == i
         rank = df18[country]['rank_order']
@@ -36,21 +37,21 @@ def update(attrname, old, new):
         preinternational = df18[country]['stats_pc_intl_students']
         international = [i[:-1] for i in df18[country]['stats_pc_intl_students']]
 
-        for j in itertools.cycle(bokeh.palettes.Category20[20]):
-            if len(color_list) == len(rank):
-                break
-            color_list += [j]
 
-        f.circle(x = rank,y = studentstaff, color = color_list,legend=[uni for uni in multi_select.value])
-        h.circle(x = international, y = boiz,color = color_list,legend=[uni for uni in multi_select.value])
-        g.circle(x=size, y= boiz,color = color_list,legend=[uni for uni in multi_select.value])
-        myString += '\n' + i
-    myText.text = myString
+        if len(color_list) == len(multi_select.value):
+            break
+        color_list += [j]
+        f.circle(x = rank,y = studentstaff, color = j,legend=[uni for uni in multi_select.value])
+        h.circle(x = international, y = boiz,color = color_list * len(international),legend=[uni for uni in multi_select.value])
+        g.circle(x= boiz,y=size, color = color_list * len(size),legend=[uni for uni in multi_select.value])
+
+        # myString += '\n' + i
+    # myText.text = myString
 
 multi_locations = sorted(list(df18['location'].unique()),key=str.upper,reverse=True)
 multi_select = MultiSelect(title="Country:", value=["0"], size=7,
                            options=multi_locations)
-myText = Paragraph(text='Initial Text', width=1200)
+# myText = Paragraph(text='Initial Text', width=1200)
 multi_select.on_change('value', update)
 multi_select_widgetbox = widgetbox(multi_select)
 
@@ -71,12 +72,11 @@ h.y_range=DataRange1d(start=0, end=100)
 
 # plot 2: size university vs percentage man
 g = figure()
-
-# Axes
-g.xaxis.axis_label="number of students"
-g.yaxis.axis_label="percentage man"
-g.y_range=DataRange1d(start=0, end=100)
+g.xaxis.axis_label="percentage man"
+g.yaxis.axis_label="number of students"
+g.x_range=DataRange1d(start=0, end=100)
+g.y_range=DataRange1d(start=0, end=300000)
 
 # gridplot alle 3 figuren en de widgetbox
-l=gridplot([[multi_select_widgetbox,myText,None],[h,g,f]])
+l=gridplot([[multi_select_widgetbox,None,None],[f,h,g]])
 curdoc().add_root(l)
