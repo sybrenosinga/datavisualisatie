@@ -40,3 +40,9 @@ create_dataframe('scores_industry_income_rank').to_csv('./Data_csv/industry_inco
 create_dataframe('scores_international_outlook_rank').to_csv('./Data_csv/international_outlook_rank.csv')
 create_dataframe('scores_research_rank').to_csv('./Data_csv/research_rank.csv')
 create_dataframe('scores_teaching_rank').to_csv('./Data_csv/teaching_rank.csv')
+
+create_dataframe('scores_citations').to_csv('./Data_csv/citations.csv')
+create_dataframe('scores_industry_income').to_csv('./Data_csv/industry_income.csv')
+create_dataframe('scores_international_outlook').to_csv('./Data_csv/international_outlook.csv')
+create_dataframe('scores_research').to_csv('./Data_csv/research.csv')
+create_dataframe('scores_teaching').to_csv('./Data_csv/teaching.csv')
