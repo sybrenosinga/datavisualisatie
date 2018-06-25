@@ -12,6 +12,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
 def update_graphs(attr, old, new):
+    dropdown.label = dropdown.value.replace('var_', '').replace('_', ' ')
     f1.x_range.factors = list(df_scores_var.groupby(['location']).mean().sort_values(dropdown.value, ascending=False).index.values)
     f.x_range.factors = list(df_scores_var.sort_values(dropdown.value, ascending=False)['name'])
     f2.x_range.factors = list(df_scores_var.nlargest(10, dropdown.value)['name'])
@@ -63,14 +64,6 @@ df_scores_var.columns = ['name', 'location', 'var_citations', 'var_industry_inco
 
 df_ranks_var = pandas.concat([df_all['name'], df_all['location'], df_all.var(axis=1), df_citations.var(axis=1), df_industry.var(axis=1), df_international.var(axis=1), df_research.var(axis=1), df_teaching.var(axis=1)], axis=1)
 df_ranks_var.columns = ['name', 'location', 'var_overall', 'var_citations', 'var_industry_income', 'var_international_outlook', 'var_research', 'var_teaching']
-
-print(df_scores_var.sort_values('var_citations'))
-
-
-
-
-
-
 
 
 category = 'var_citations'
