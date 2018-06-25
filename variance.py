@@ -16,6 +16,10 @@ def update_graphs(attr, old, new):
     f.x_range.factors = list(df_scores_var.sort_values(dropdown.value, ascending=False)['name'])
     f2.x_range.factors = list(df_scores_var.nlargest(10, dropdown.value)['name'])
     f3.x_range.factors = list(df_scores_var.nsmallest(10, dropdown.value)['name'])
+    f1.title.text = 'Variance {} per country from 2011 to 2018'.format(dropdown.value).replace('var_', '').replace('_', ' ')
+    f.title.text = 'Variance {} from 2011 to 2018'.format(dropdown.value).replace('var_', '').replace('_', ' ')
+    f2.title.text = 'Top 10 least stable universities ({})'.format(dropdown.value).replace('var_', '').replace('_', ' ')
+    f3.title.text = 'Top 10 most stable universities ({})'.format(dropdown.value).replace('var_', '').replace('_', ' ')
     source.data=dict(x_f=df_scores_var.sort_values(dropdown.value, ascending=False)['name'].tolist(),
                      top_f=df_scores_var.sort_values(dropdown.value, ascending=False)[dropdown.value])
     source1.data=dict(x_f1=df_scores_var.groupby(['location']).mean().sort_values(dropdown.value, ascending=False).index.values,
@@ -79,20 +83,20 @@ source2 = ColumnDataSource(data=dict(x_f2=df_scores_var.nlargest(10, 'var_citati
 source3 = ColumnDataSource(data=dict(x_f3=df_scores_var.nsmallest(10, 'var_citations')['name'].tolist(),
                                     top_f3=df_scores_var.nsmallest(10, 'var_citations')['var_citations']))
 
-f = figure(x_range=df_scores_var.sort_values('var_citations', ascending=False)['name'].tolist(), title='Variance citations from 2011 t0 2018')
+f = figure(x_range=df_scores_var.sort_values('var_citations', ascending=False)['name'].tolist(), title='Variance citations from 2011 t0 2018', y_axis_label='variance')
 f.vbar(x='x_f', top='top_f', source=source, bottom=0, width=0.5, fill_color="#b3de69")
 f.xaxis.major_label_orientation = 1
 f.plot_width = 1750
 
-f1 = figure(x_range=df_scores_var.groupby(['location']).mean().sort_values('var_citations', ascending=False).index.values, title='Variance citations per country from 2011 to 2018')
+f1 = figure(x_range=df_scores_var.groupby(['location']).mean().sort_values('var_citations', ascending=False).index.values, title='Variance citations per country from 2011 to 2018', y_axis_label='variance')
 f1.vbar(x='x_f1', top='top_f1', source=source1, bottom=0, width=0.5, fill_color="#b3de69")
 f1.xaxis.major_label_orientation = 1
 
-f2 = figure(x_range=df_scores_var.nlargest(10, 'var_citations')['name'].tolist(), title='Top 10 least stable universities')
+f2 = figure(x_range=df_scores_var.nlargest(10, 'var_citations')['name'].tolist(), title='Top 10 least stable universities (citations)', y_axis_label='variance')
 f2.vbar(x='x_f2', top='top_f2', source=source2, bottom=0, width=0.5, fill_color="#b3de69")
 f2.xaxis.major_label_orientation = 1
 
-f3 = figure(x_range=df_scores_var.nsmallest(10, 'var_citations')['name'].tolist(), title='Top 10 most stable universities')
+f3 = figure(x_range=df_scores_var.nsmallest(10, 'var_citations')['name'].tolist(), title='Top 10 most stable universities (citations)', y_axis_label='variance')
 f3.vbar(x='x_f3', top='top_f3', source=source3, bottom=0, width=0.5, fill_color="#b3de69")
 f3.xaxis.major_label_orientation = 1
 
