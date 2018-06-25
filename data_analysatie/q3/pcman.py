@@ -45,7 +45,7 @@ boxman = [man16, man17, man18]
 
 
 # histogram 2016
-arr_hist16, edges16 = np.histogram(df16['percentage_male'],
+arr_hist16, edges16 = np.histogram(df16['percentage_male'][:800],
                                bins = int(100/4),
                                range = [0, 100])
 
@@ -68,7 +68,7 @@ p16.quad(bottom=0, top=uni16['arr_man'],
        fill_color='green', line_color='black')
 
 # histogram 2017
-arr_hist17, edges17 = np.histogram(df17['percentage_male'],
+arr_hist17, edges17 = np.histogram(df17['percentage_male'][:800],
                                bins = int(100/4),
                                range = [0, 100])
 
@@ -91,7 +91,7 @@ p17.quad(bottom=0, top=uni17['arr_man'],
        fill_color='green', line_color='black')
 
 # histogram 2018
-arr_hist18, edges18 = np.histogram(df18['percentage_male'],
+arr_hist18, edges18 = np.histogram(df18['percentage_male'][:800],
                                bins = int(100/4),
                                range = [0, 100])
 

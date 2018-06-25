@@ -13,14 +13,14 @@ from bokeh.palettes import Spectral6
 import pandas
 
 # get tables of all years
-df11 = pd.read_csv('./Data_csv/data_2011.csv')
-df12 = pd.read_csv('./Data_csv/data_2012.csv')
-df13 = pd.read_csv('./Data_csv/data_2013.csv')
-df14 = pd.read_csv('./Data_csv/data_2014.csv')
-df15 = pd.read_csv('./Data_csv/data_2015.csv')
-df16 = pd.read_csv('./Data_csv/data_2016.csv')
-df17 = pd.read_csv('./Data_csv/data_2017.csv')
-df18 = pd.read_csv('./Data_csv/data_2018.csv')
+df11 = pd.read_csv('../Data_csv/data_2011.csv')
+df12 = pd.read_csv('../Data_csv/data_2012.csv')
+df13 = pd.read_csv('../Data_csv/data_2013.csv')
+df14 = pd.read_csv('../Data_csv/data_2014.csv')
+df15 = pd.read_csv('../Data_csv/data_2015.csv')
+df16 = pd.read_csv('../Data_csv/data_2016.csv')
+df17 = pd.read_csv('../Data_csv/data_2017.csv')
+df18 = pd.read_csv('../Data_csv/data_2018.csv')
 global color_list
 # multiselect different countries in 3 plots
 color_list = bokeh.palettes.Category20[20]
@@ -37,11 +37,12 @@ def update(attrname, old, new):
         boiz = df18[country]['percentage_male']
         preinternational = df18[country]['stats_pc_intl_students']
         international = [i[:-1] for i in df18[country]['stats_pc_intl_students']]
-        color_list = color_list[1:]
+
         f.circle(x = rank,y = studentstaff, color = color_list[0],legend=[uni for uni in multi_select.value])
         h.circle(x = international, y = boiz,color = color_list[0],legend=[uni for uni in multi_select.value])
         g.circle(x= boiz,y=size, color = color_list[0],legend=[uni for uni in multi_select.value])
-
+        color_list = color_list[1:]
+        
     # next(color_list)
 
         # myString += '\n' + i
