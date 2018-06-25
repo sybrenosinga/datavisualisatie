@@ -9,6 +9,8 @@ from bokeh.models import DataRange1d
 from bokeh.layouts import column, widgetbox, gridplot
 from bokeh.models.widgets import MultiSelect, Paragraph
 from bokeh.palettes import Spectral6
+from bokeh.models.widgets import MultiSelect, TextInput
+from bokeh.models import ColumnDataSource, CustomJS, HoverTool
 
 import pandas
 
@@ -27,27 +29,41 @@ def update(attrname, old, new):
     myString = ''
     color_list = []
 
-    for j,i in zip(bokeh.palettes.Spectral6,multi_select.value):
-
-        country = df18['location'] == i
-        rank = df18[country]['rank_order']
-        studentstaff = df18[country]['stats_student_staff_ratio']
-        size = df18[country]['stats_number_students']
-        boiz = df18[country]['percentage_male']
-        preinternational = df18[country]['stats_pc_intl_students']
-        international = [i[:-1] for i in df18[country]['stats_pc_intl_students']]
-
+    for i in itertools.cycle(bokeh.palettes.Category20[20]):
 
         if len(color_list) == len(multi_select.value):
             break
-        color_list += [j]
-        f.circle(x = rank,y = studentstaff, color = j,legend=[uni for uni in multi_select.value])
-        h.circle(x = international, y = boiz,color = color_list * len(international),legend=[uni for uni in multi_select.value])
-        g.circle(x= boiz,y=size, color = color_list * len(size),legend=[uni for uni in multi_select.value])
+        color_list += [i]
+
+        source.data = dict(
+            location=[df18[df18['location'] == uni]for uni in multi_select.value],
+            xf=[df18[uni]['rank_order'] for uni in multi_select.value],
+            yf=[df18[uni]['stats_student_staff_ratio'] for uni in multi_select.value],
+            # xh=[df18[uni]['stats_pc_intl_students'][:-1] for uni in multi_select.value],
+            # yh=[df18[uni]['percentage_male'] for uni in multi_select.value],
+            xg=[df18[uni]['percentage_male'] for uni in multi_select.value],
+            yg=[df18[uni]['stats_number_students'] for uni in multi_select.value],
+            legend=[uni for uni in multi_select.value],
+            color_list=[color * 1103 for color in color_list],
+        )
+
+print(df18[df18['location'] == 'Uganda'])
 
         # myString += '\n' + i
     # myText.text = myString
 
+legend = ['University of Amsterdam']
+color_list = [bokeh.palettes.Category20[20][0]]
+
+source = ColumnDataSource(data=dict(
+            location=df18['location'],
+            xf=df18['rank_order'],
+            yf=df18['stats_student_staff_ratio'],
+            # xh=df18['stats_pc_intl_students'][:-1],
+            # yh=df18['percentage_male'],
+            xg=df18['percentage_male'],
+            yg=df18['stats_number_students'],
+        ))
 multi_locations = sorted(list(df18['location'].unique()),key=str.upper,reverse=True)
 multi_select = MultiSelect(title="Country:", value=["0"], size=7,
                            options=multi_locations)
@@ -63,12 +79,12 @@ f.x_range=DataRange1d(start=0, end=1103)
 f.y_range=DataRange1d(start=0, end=90)
 f.legend.location = 'bottom_right'
 
-# plot 3: percentage international vs percentage man (omdat size handig met t bolletje zelf kan)
-h = figure()
-h.xaxis.axis_label="percentage international"
-h.yaxis.axis_label="percentage man"
-h.x_range=DataRange1d(start=0, end=50)
-h.y_range=DataRange1d(start=0, end=100)
+# # plot 3: percentage international vs percentage man (omdat size handig met t bolletje zelf kan)
+# h = figure()
+# h.xaxis.axis_label="percentage international"
+# h.yaxis.axis_label="percentage man"
+# h.x_range=DataRange1d(start=0, end=50)
+# h.y_range=DataRange1d(start=0, end=100)
 
 # plot 2: size university vs percentage man
 g = figure()
@@ -77,6 +93,10 @@ g.yaxis.axis_label="number of students"
 g.x_range=DataRange1d(start=0, end=100)
 g.y_range=DataRange1d(start=0, end=300000)
 
+f.circle(x = 'xf',y = 'yf', color = 'color_list',legend='legend',source=source)
+# h.circle(x = 'xh', y = 'yh',color = 'color_list',legend='legend',source=source)
+g.circle(x= 'xg', y='yg', color = 'color_list',legend='legend',source=source)
+
 # gridplot alle 3 figuren en de widgetbox
-l=gridplot([[multi_select_widgetbox,None,None],[f,h,g]])
+l=gridplot([[multi_select_widgetbox,None,None],[f,None,g]])
 curdoc().add_root(l)
