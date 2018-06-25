@@ -47,7 +47,7 @@ def update(attrname, old, new):
             color_list=[color * 1103 for color in color_list],
         )
 
-print(df18[df18['location'] == 'Uganda'])
+# print(df18[df18['location'] == 'Uganda'])
 
         # myString += '\n' + i
     # myText.text = myString
