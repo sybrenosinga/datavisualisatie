@@ -76,30 +76,31 @@ source2 = ColumnDataSource(data=dict(x_f2=df_scores_var.nlargest(10, 'var_citati
 source3 = ColumnDataSource(data=dict(x_f3=df_scores_var.nsmallest(10, 'var_citations')['name'].tolist(),
                                     top_f3=df_scores_var.nsmallest(10, 'var_citations')['var_citations']))
 
-f = figure(x_range=df_scores_var.sort_values('var_citations', ascending=False)['name'].tolist(), title='Variance citations from 2011 t0 2018', y_axis_label='variance')
+f = figure(x_range=df_scores_var.sort_values('var_citations', ascending=False)['name'].tolist(), title='Variance citations from 2011 to 2018', y_axis_label='variance')
 f.vbar(x='x_f', top='top_f', source=source, bottom=0, width=0.5, fill_color="#b3de69")
-f.xaxis.major_label_orientation = 1
-f.plot_width = 1750
+f.xaxis.major_label_orientation = 'vertical'
+
+f.plot_width = 1850
 
 f1 = figure(x_range=df_scores_var.groupby(['location']).mean().sort_values('var_citations', ascending=False).index.values, title='Variance citations per country from 2011 to 2018', y_axis_label='variance')
 f1.vbar(x='x_f1', top='top_f1', source=source1, bottom=0, width=0.5, fill_color="#b3de69")
-f1.xaxis.major_label_orientation = 1
+f1.xaxis.major_label_orientation = 'vertical'
 
 f2 = figure(x_range=df_scores_var.nlargest(10, 'var_citations')['name'].tolist(), title='Top 10 least stable universities (citations)', y_axis_label='variance')
 f2.vbar(x='x_f2', top='top_f2', source=source2, bottom=0, width=0.5, fill_color="#b3de69")
-f2.xaxis.major_label_orientation = 1
+f2.xaxis.major_label_orientation = 'verical'
 
 f3 = figure(x_range=df_scores_var.nsmallest(10, 'var_citations')['name'].tolist(), title='Top 10 most stable universities (citations)', y_axis_label='variance')
 f3.vbar(x='x_f3', top='top_f3', source=source3, bottom=0, width=0.5, fill_color="#b3de69")
-f3.xaxis.major_label_orientation = 1
+f3.xaxis.major_label_orientation = 'vertical'
 
 dropdown = Dropdown(label="Category", button_type="warning", menu=[('citations', 'var_citations'), ('industry income', 'var_industry_income'), ('international outlook', 'var_international_outlook'), ('research', 'var_research'), ('teaching', 'var_teaching')])
 
 dropdown.on_change('value', update_graphs)
 
 
-curdoc().add_root(column(f, row(f1, f2, f3, dropdown)))
+curdoc().add_root(column(dropdown, f, row(f1, f2, f3)))
 curdoc().title = "Variance scores Universities"
 
 
-show(column(f, row(f1, f2, f3, dropdown)))
+show(column(dropdown, f, row(f1, f2, f3)))
