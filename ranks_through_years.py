@@ -13,6 +13,8 @@ from bokeh.layouts import column, row, widgetbox
 from bokeh.models.widgets import MultiSelect, TextInput
 from bokeh.models import ColumnDataSource, CustomJS, HoverTool
 
+from bokeh.embed import components, server_document
+
 def update_source(attr, old, new):
     color_list = []
     for i in itertools.cycle(bokeh.palettes.Category20[20]):
@@ -112,4 +114,16 @@ curdoc().title = "University rankings through years"
 
 show(row(column(f_all, widgetbox(multi_select, ti)), column(f_citations, f_industry), column(f_international, f_research), f_teaching))
 
+# save(row(column(f_all, widgetbox(multi_select, ti)), column(f_citations, f_industry), column(f_international, f_research), f_teaching))
 
+# script, div = components(f_all)
+
+script = server_document("http://localhost:5006/ranks_through_years")
+
+print(script)
+# print(div)
+
+with open('ranks.script.html', 'w') as file:
+    file.write(script)
+# with open('ranks.div.html', 'w') as file:
+#     file.write(div)
