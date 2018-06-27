@@ -107,9 +107,9 @@ f_research.plot_width = 300
 f_teaching.plot_height = 300
 f_teaching.plot_width = 300
 
-curdoc().add_root(row(column(f_all, widgetbox(multi_select, ti)), column(f_citations, f_industry), column(f_international, f_research), f_teaching))
+curdoc().add_root(row(column(f_all), column(f_citations, f_industry), column(f_international, f_research), column(f_teaching, widgetbox(multi_select, ti))))
 curdoc().title = "University rankings through years"
 
-show(row(column(f_all, widgetbox(multi_select, ti)), column(f_citations, f_industry), column(f_international, f_research), f_teaching))
+show(row(column(f_all), column(f_citations, f_industry), column(f_international, f_research), column(f_teaching, widgetbox(multi_select, ti))))
 
 
