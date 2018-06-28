@@ -88,7 +88,7 @@ f1.xaxis.major_label_orientation = 'vertical'
 
 f2 = figure(x_range=df_scores_var.nlargest(10, 'var_citations')['name'].tolist(), title='Top 10 least stable universities (citations)', y_axis_label='variance')
 f2.vbar(x='x_f2', top='top_f2', source=source2, bottom=0, width=0.5, fill_color="#b3de69")
-f2.xaxis.major_label_orientation = 'verical'
+f2.xaxis.major_label_orientation = 'vertical'
 
 f3 = figure(x_range=df_scores_var.nsmallest(10, 'var_citations')['name'].tolist(), title='Top 10 most stable universities (citations)', y_axis_label='variance')
 f3.vbar(x='x_f3', top='top_f3', source=source3, bottom=0, width=0.5, fill_color="#b3de69")
