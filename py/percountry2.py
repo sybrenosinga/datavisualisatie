@@ -8,6 +8,7 @@ from bokeh.layouts import gridplot
 from bokeh.plotting import figure, output_file, show, ColumnDataSource
 from bokeh.models import HoverTool
 from bokeh.transform import factor_cmap
+from bokeh.embed import components, server_document
 
 import pandas
 
@@ -76,7 +77,7 @@ unidb = unidb.assign(all = all_unis)
 unidb = unidb.assign(pc_smooth = pc_in_top_smooth)
 
 # maak plot
-output_file('./percountry.html')
+output_file('./percountry2.html')
 
 # sort database
 unidb_sorted = unidb.sort_values(by=['pc'], ascending = False)
@@ -126,7 +127,7 @@ hover = HoverTool(tooltips=[
     ("smooth", "@pc_smooth")
 ])
 
-f = figure(x_range=FactorRange(*x), plot_width=1800 , plot_height = 500, tools =[hover],title="percentage of universities in top 1000")
+f = figure(x_range=FactorRange(*x), plot_width=1400 , plot_height = 500, tools =[hover],title="percentage of universities in top 1000")
 f.vbar(x='x', top='counts', legend = 'percentage of universities',line_color= 'white', fill_color=factor_cmap('x', palette=['#0066cc','#b3d9ff'], factors=pcs, start=1, end=2), width=0.85, source=source)
 
 f.xgrid.grid_line_color = 'lightgrey'
@@ -135,3 +136,7 @@ f.y_range.start = 0
 f.y_range=DataRange1d(start=0, end=35)
 
 show(f)
+script, div = components(f)
+
+print(script)
+print(div)

@@ -33,17 +33,17 @@ def update_source(attr, old, new):
                        location=[df_all[df_all['name'] == uni]['location'] for uni in multi_select.value])
 
 # Open data and create dataframes + transposes
-df_all = pandas.DataFrame.from_csv('./Data_csv/rank_order.csv')
+df_all = pandas.DataFrame.from_csv('../Data_csv/rank_order.csv')
 dfT_all = df_all.transpose()
-df_citations = pandas.DataFrame.from_csv('./Data_csv/citations_rank.csv')
+df_citations = pandas.DataFrame.from_csv('../Data_csv/citations_rank.csv')
 dfT_citations = df_citations.transpose()
-df_industry = pandas.DataFrame.from_csv('./Data_csv/industry_income_rank.csv')
+df_industry = pandas.DataFrame.from_csv('../Data_csv/industry_income_rank.csv')
 dfT_industry = df_industry.transpose()
-df_international = pandas.DataFrame.from_csv('./Data_csv/international_outlook_rank.csv')
+df_international = pandas.DataFrame.from_csv('../Data_csv/international_outlook_rank.csv')
 dfT_international = df_international.transpose()
-df_research = pandas.DataFrame.from_csv('./Data_csv/research_rank.csv')
+df_research = pandas.DataFrame.from_csv('../Data_csv/research_rank.csv')
 dfT_research = df_research.transpose()
-df_teaching = pandas.DataFrame.from_csv('./Data_csv/teaching_rank.csv')
+df_teaching = pandas.DataFrame.from_csv('../Data_csv/teaching_rank.csv')
 dfT_teaching = df_teaching.transpose()
 
 # Prepare some data
@@ -112,7 +112,7 @@ f_teaching.plot_width = 300
 curdoc().add_root(row(column(f_all, widgetbox(multi_select, ti)), column(f_citations, f_industry), column(f_international, f_research), f_teaching))
 curdoc().title = "University rankings through years"
 
-show(row(column(f_all, widgetbox(multi_select, ti)), column(f_citations, f_industry), column(f_international, f_research), f_teaching))
+# show(row(column(f_all, widgetbox(multi_select, ti)), column(f_citations, f_industry), column(f_international, f_research), f_teaching))
 
 # save(row(column(f_all, widgetbox(multi_select, ti)), column(f_citations, f_industry), column(f_international, f_research), f_teaching))
 
@@ -120,10 +120,10 @@ show(row(column(f_all, widgetbox(multi_select, ti)), column(f_citations, f_indus
 
 script = server_document("http://localhost:5006/ranks_through_years")
 
-print(script)
+# print(script)
 # print(div)
 
-with open('ranks.script.html', 'w') as file:
-    file.write(script)
+# with open('ranks.script.html', 'w') as file:
+#     file.write(script)
 # with open('ranks.div.html', 'w') as file:
 #     file.write(div)
