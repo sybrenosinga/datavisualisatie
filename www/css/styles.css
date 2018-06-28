@@ -12,3 +12,21 @@ footer img {
     padding-right: 1em;
     height: 30px;
 }
+
+container #content{
+    width: 90% !important;
+}
+
+.bk-widget-box {
+    height: 1em !important;
+}
+
+#test3 .bk-root {
+    display: block;
+    height: 900px;
+}
+
+#fix {
+    height: 600px;
+}
+}

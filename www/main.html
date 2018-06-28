@@ -6,13 +6,13 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
-    <link type="text/css" rel="stylesheet" href="css/styles.css" media="screen,projection" />
 
 
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-0.13.0.min.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.13.0.min.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-tables-0.13.0.min.css" rel="stylesheet" type="text/css">
 
+    <link type="text/css" rel="stylesheet" href="css/styles.css" media="screen,projection" />
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -21,535 +21,93 @@
     <header>
         <div class="navbar-fixed">
             <nav class="red lighten-1">
-                <div class="nav-wrapper">
+                <div class="container"><div class="nav-wrapper">
                     <a href="#!" class="brand-logo">University Rankings</a>
-                </div>
+                </div></div>
             </nav>
         </div>
     </header>
 
     <main>
-
-        <div class="bk-root">
-            <div class="bk-plotdiv" id="87f9fcb7-4c14-4804-a519-32d840c40761"></div>
-        </div>
-        <div class="container">
+        <div class="container" id="content">
             <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
                 <li class="tab"><a href="#test1">Data</a></li>
                 <li class="tab"><a href="#test2">Variance</a></li>
                 <li class="tab"><a href="#test3">Location Distribution</a></li>
-                <li class="tab"><a href="#test4">Gender ratio</a></li>
+                <li class="tab"><a href="#test4">Top Rank Participation</a></li>
             </ul>
+            <div id="test1" class="card col s12">
+                <div class="card-action"><h4>Rank changes throughout the years</h4></div><hr>
+                <div class="card-content">
+                    <script src="http://localhost:5006/ranks_through_years/autoload.js?bokeh-autoload-element=c78bf025-e9bb-4f6e-b10d-c787513fa44f&bokeh-app-path=/ranks_through_years&bokeh-absolute-url=http://localhost:5006/ranks_through_years" id="c78bf025-e9bb-4f6e-b10d-c787513fa44f"></script>
+                </div>
+            </div>
             <div id="test2" class="card col s12">
+                <div class="card-action"><h4>University Quality Consistency</h4></div><hr>
+                <div class="card-content">
                 <script src="http://localhost:5006/variance/autoload.js?bokeh-autoload-element=830add03-3cd5-4f10-b213-3dbdc8c54566&bokeh-app-path=/variance&bokeh-absolute-url=http://localhost:5006/variance" id="830add03-3cd5-4f10-b213-3dbdc8c54566"></script>
             </div>
-            <div id="test1" class="card col s12">
-                <script src="http://localhost:5006/ranks_through_years/autoload.js?bokeh-autoload-element=c78bf025-e9bb-4f6e-b10d-c787513fa44f&bokeh-app-path=/ranks_through_years&bokeh-absolute-url=http://localhost:5006/ranks_through_years" id="c78bf025-e9bb-4f6e-b10d-c787513fa44f"></script>
             </div>
             <div id="test3" class="card col s12">
-                <script
-    src="http://localhost:5006/viewlocation2/autoload.js?bokeh-autoload-element=7abf6e60-1152-443c-b38a-6f738126dea9&bokeh-app-path=/viewlocation2&bokeh-absolute-url=http://localhost:5006/viewlocation2"
-    id="7abf6e60-1152-443c-b38a-6f738126dea9"
-    data-bokeh-model-id=""
-    data-bokeh-doc-id=""
-></script>
+
+                <div class="card-action"><h4>Vital Statistics by Country</h4></div><hr>
+                <div class="card-content">
+                <script src="http://localhost:5006/viewlocation2/autoload.js?bokeh-autoload-element=7abf6e60-1152-443c-b38a-6f738126dea9&bokeh-app-path=/viewlocation2&bokeh-absolute-url=http://localhost:5006/viewlocation2" id="7abf6e60-1152-443c-b38a-6f738126dea9" data-bokeh-model-id=""
+                    data-bokeh-doc-id=""></script>
+                    </div>
+                    <div class="white-text"id="fix">
+                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis vulputate enim nulla aliquet. Nisi lacus sed viverra tellus in hac. Amet est placerat in egestas erat. Ut tortor pretium viverra suspendisse potenti nullam ac. Nunc scelerisque viverra mauris in aliquam. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt. Sit amet consectetur adipiscing elit ut aliquam purus sit. Eu augue ut lectus arcu bibendum at varius. Sapien pellentesque habitant morbi tristique senectus. Porttitor massa id neque aliquam vestibulum morbi. In ante metus dictum at tempor commodo ullamcorper a lacus. Ac placerat vestibulum lectus mauris ultrices eros in. Sed faucibus turpis in eu mi bibendum neque egestas congue. Viverra accumsan in nisl nisi scelerisque eu ultrices vitae auctor.
+
+In est ante in nibh mauris cursus mattis molestie. Sed felis eget velit aliquet sagittis. Quisque id diam vel quam elementum. Non diam phasellus vestibulum lorem. Eget dolor morbi non arcu risus quis varius. Consectetur lorem donec massa sapien faucibus et molestie ac feugiat. Potenti nullam ac tortor vitae purus faucibus ornare suspendisse. Magna eget est lorem ipsum dolor sit amet consectetur adipiscing. Duis ultricies lacus sed turpis tincidunt id aliquet.
+
+</span>
+                    </div>
             </div>
             <div id="test4" class="card col s12">
-                <div class="bk-root" id="7e115bb6-ec98-42ae-83e3-73fdbafa37bf"></div>
+                <div class="card-action"><h4>Percentage of Top Ranked Universties in Relation to the National Total</h4></div><hr>
+                <div class="card-content">
+                    <div class="bk-root">
+                        <div class="bk-plotdiv" id="2f105da1-b135-4ef4-a1b6-527f3af575fe"></div>
+                    </div>
+                </div>
 
-
-
-
-                <script type="application/json" id="1175f612-aec7-4ccd-82dc-6bda2be50870">
-                    {
-                        "2cef8e51-1e91-4bd6-bd82-e46b74471f96": {
-                            "roots": {
-                                "references": [{
-                                    "attributes": {},
-                                    "id": "e18b3d6e-b608-48f5-a476-78a918258ace",
-                                    "type": "BasicTicker"
-                                }, {
-                                    "attributes": {
-                                        "items": [{
-                                            "id": "0bbcb88f-f676-475d-93a6-65dbcfeee0bb",
-                                            "type": "LegendItem"
-                                        }],
-                                        "plot": {
-                                            "id": "aa845577-a87f-4f95-9165-2e22461af6ac",
-                                            "subtype": "Figure",
-                                            "type": "Plot"
-                                        }
-                                    },
-                                    "id": "420ac168-4a73-42da-8bd0-0ff00c43913f",
-                                    "type": "Legend"
-                                }, {
-                                    "attributes": {
-                                        "callback": null,
-                                        "data": {
-                                            "all": [3, 3, 285, 285, 22, 22, 46, 46, 9, 9, 44, 44, 159, 159, 47, 47, 199, 199, 235, 235, 80, 80, 80, 80, 53, 53, 61, 61, 41, 41, 7, 7, 169, 169, 252, 252],
-                                            "counts": [33.33333333333333, 25.0, 32.631578947368425, 32.51748251748251, 27.27272727272727, 26.08695652173913, 23.91304347826087, 23.404255319148938, 22.22222222222222, 20.0, 20.454545454545457,
-                                                20.0, 19.49685534591195, 19.375, 19.148936170212767, 18.75, 17.587939698492463, 17.5, 17.02127659574468, 16.94915254237288, 16.25, 16.049382716049383, 16.25, 16.049382716049383,
-                                                15.09433962264151, 14.814814814814813, 14.754098360655737, 14.516129032258066, 14.634146341463413, 14.285714285714285, 14.285714285714285, 12.5, 13.017751479289942, 12.941176470588237,
-                                                11.507936507936508, 11.462450592885375
-                                            ],
-                                            "locations": ["Luxembourg", "Luxembourg", "United Kingdom", "United Kingdom", "Hong Kong", "Hong Kong", "Sweden", "Sweden", "Iceland", "Iceland", "Finland", "Finland", "Taiwan", "Taiwan", "Ireland",
-                                                "Ireland", "Australia", "Australia", "Italy", "Italy", "Chile", "Chile", "Czech Republic", "Czech Republic", "New Zealand", "New Zealand", "Egypt", "Egypt", "Israel", "Israel", "Qatar",
-                                                "Qatar", "Turkey", "Turkey", "Spain", "Spain"
-                                            ],
-                                            "pc": [33.33333333333333, 33.33333333333333, 32.631578947368425, 32.631578947368425, 27.27272727272727, 27.27272727272727, 23.91304347826087, 23.91304347826087, 22.22222222222222, 22.22222222222222,
-                                                20.454545454545457, 20.454545454545457, 19.49685534591195, 19.49685534591195, 19.148936170212767, 19.148936170212767, 17.587939698492463, 17.587939698492463, 17.02127659574468,
-                                                17.02127659574468, 16.25, 16.25, 16.25, 16.25, 15.09433962264151, 15.09433962264151, 14.754098360655737, 14.754098360655737, 14.634146341463413, 14.634146341463413, 14.285714285714285,
-                                                14.285714285714285, 13.017751479289942, 13.017751479289942, 11.507936507936508, 11.507936507936508
-                                            ],
-                                            "pc_smooth": [25.0, 25.0, 32.51748251748251, 32.51748251748251, 26.08695652173913, 26.08695652173913, 23.404255319148938, 23.404255319148938, 20.0, 20.0, 20.0, 20.0, 19.375, 19.375, 18.75, 18.75,
-                                                17.5, 17.5, 16.94915254237288, 16.94915254237288, 16.049382716049383, 16.049382716049383, 16.049382716049383, 16.049382716049383, 14.814814814814813, 14.814814814814813, 14.516129032258066,
-                                                14.516129032258066, 14.285714285714285, 14.285714285714285, 12.5, 12.5, 12.941176470588237, 12.941176470588237, 11.462450592885375, 11.462450592885375
-                                            ],
-                                            "some": [1, 1, 93, 93, 6, 6, 11, 11, 2, 2, 9, 9, 31, 31, 9, 9, 35, 35, 40, 40, 13, 13, 13, 13, 8, 8, 9, 9, 6, 6, 1, 1, 22, 22, 29, 29],
-                                            "x": [
-                                                ["Luxembourg", "original"],
-                                                ["Luxembourg", "smooth"],
-                                                ["United Kingdom", "original"],
-                                                ["United Kingdom", "smooth"],
-                                                ["Hong Kong", "original"],
-                                                ["Hong Kong", "smooth"],
-                                                ["Sweden", "original"],
-                                                ["Sweden", "smooth"],
-                                                ["Iceland", "original"],
-                                                ["Iceland", "smooth"],
-                                                ["Finland", "original"],
-                                                ["Finland", "smooth"],
-                                                ["Taiwan", "original"],
-                                                ["Taiwan", "smooth"],
-                                                ["Ireland", "original"],
-                                                ["Ireland", "smooth"],
-                                                ["Australia", "original"],
-                                                ["Australia", "smooth"],
-                                                ["Italy", "original"],
-                                                ["Italy", "smooth"],
-                                                ["Chile", "original"],
-                                                ["Chile", "smooth"],
-                                                ["Czech Republic", "original"],
-                                                ["Czech Republic", "smooth"],
-                                                ["New Zealand", "original"],
-                                                ["New Zealand", "smooth"],
-                                                ["Egypt", "original"],
-                                                ["Egypt", "smooth"],
-                                                ["Israel", "original"],
-                                                ["Israel", "smooth"],
-                                                ["Qatar", "original"],
-                                                ["Qatar", "smooth"],
-                                                ["Turkey", "original"],
-                                                ["Turkey", "smooth"],
-                                                ["Spain", "original"],
-                                                ["Spain", "smooth"]
-                                            ]
-                                        },
-                                        "selected": {
-                                            "id": "69f60d73-5a1e-4ac2-b2ac-d7b29f007316",
-                                            "type": "Selection"
-                                        },
-                                        "selection_policy": {
-                                            "id": "235f08ba-58f7-4cf2-b090-ef7b21853100",
-                                            "type": "UnionRenderers"
-                                        }
-                                    },
-                                    "id": "d123f9af-fef2-44fd-8a1d-0c8a089a18a3",
-                                    "type": "ColumnDataSource"
-                                }, {
-                                    "attributes": {
-                                        "label": {
-                                            "value": "percentage of universities"
-                                        },
-                                        "renderers": [{
-                                            "id": "a214c759-cd57-4113-90d9-d819ab53cb1f",
-                                            "type": "GlyphRenderer"
-                                        }]
-                                    },
-                                    "id": "0bbcb88f-f676-475d-93a6-65dbcfeee0bb",
-                                    "type": "LegendItem"
-                                }, {
-                                    "attributes": {},
-                                    "id": "bcd3d4f0-b962-47ad-ab8f-e0cfd9e7b99b",
-                                    "type": "LinearScale"
-                                }, {
-                                    "attributes": {},
-                                    "id": "cd0aad00-a4df-40cc-930c-fba1e9af94d1",
-                                    "type": "CategoricalTickFormatter"
-                                }, {
-                                    "attributes": {
-                                        "active_drag": "auto",
-                                        "active_inspect": "auto",
-                                        "active_multi": null,
-                                        "active_scroll": "auto",
-                                        "active_tap": "auto",
-                                        "tools": [{
-                                            "id": "5b137222-3f01-4fa1-880b-25182b5b0e61",
-                                            "type": "HoverTool"
-                                        }]
-                                    },
-                                    "id": "a932be7b-1525-41ee-8fbd-4746ecf2c59f",
-                                    "type": "Toolbar"
-                                }, {
-                                    "attributes": {
-                                        "callback": null,
-                                        "end": 35,
-                                        "start": 0
-                                    },
-                                    "id": "da3abcd8-57a6-4d9a-8c73-f180cbc7ddab",
-                                    "type": "DataRange1d"
-                                }, {
-                                    "attributes": {},
-                                    "id": "9cd906fe-2b36-4e79-bb93-3368e6e33147",
-                                    "type": "CategoricalScale"
-                                }, {
-                                    "attributes": {
-                                        "data_source": {
-                                            "id": "d123f9af-fef2-44fd-8a1d-0c8a089a18a3",
-                                            "type": "ColumnDataSource"
-                                        },
-                                        "glyph": {
-                                            "id": "fd66f421-6838-4424-a164-d0fe8676de2c",
-                                            "type": "VBar"
-                                        },
-                                        "hover_glyph": null,
-                                        "muted_glyph": null,
-                                        "nonselection_glyph": {
-                                            "id": "c3875aab-212b-4001-9876-b54582f5d11b",
-                                            "type": "VBar"
-                                        },
-                                        "selection_glyph": null,
-                                        "view": {
-                                            "id": "0266c7b7-0531-443e-9e3d-95d108b2dde5",
-                                            "type": "CDSView"
-                                        }
-                                    },
-                                    "id": "a214c759-cd57-4113-90d9-d819ab53cb1f",
-                                    "type": "GlyphRenderer"
-                                }, {
-                                    "attributes": {},
-                                    "id": "69f60d73-5a1e-4ac2-b2ac-d7b29f007316",
-                                    "type": "Selection"
-                                }, {
-                                    "attributes": {
-                                        "formatter": {
-                                            "id": "ddb21a3d-d1ea-4291-8b8c-58fb3c486832",
-                                            "type": "BasicTickFormatter"
-                                        },
-                                        "plot": {
-                                            "id": "aa845577-a87f-4f95-9165-2e22461af6ac",
-                                            "subtype": "Figure",
-                                            "type": "Plot"
-                                        },
-                                        "ticker": {
-                                            "id": "e18b3d6e-b608-48f5-a476-78a918258ace",
-                                            "type": "BasicTicker"
-                                        }
-                                    },
-                                    "id": "4513e199-f6bb-4e36-97d4-e2acaf091619",
-                                    "type": "LinearAxis"
-                                }, {
-                                    "attributes": {
-                                        "plot": null,
-                                        "text": "percentage of universities in top 1000"
-                                    },
-                                    "id": "b2800d1b-286e-47d2-bd26-0fd717744a38",
-                                    "type": "Title"
-                                }, {
-                                    "attributes": {
-                                        "formatter": {
-                                            "id": "cd0aad00-a4df-40cc-930c-fba1e9af94d1",
-                                            "type": "CategoricalTickFormatter"
-                                        },
-                                        "major_label_orientation": 1,
-                                        "plot": {
-                                            "id": "aa845577-a87f-4f95-9165-2e22461af6ac",
-                                            "subtype": "Figure",
-                                            "type": "Plot"
-                                        },
-                                        "ticker": {
-                                            "id": "6202433c-17e4-4047-a8f9-8654548ad268",
-                                            "type": "CategoricalTicker"
-                                        }
-                                    },
-                                    "id": "8acdf17d-83ad-49e4-8d89-067b19f31edc",
-                                    "type": "CategoricalAxis"
-                                }, {
-                                    "attributes": {
-                                        "below": [{
-                                            "id": "8acdf17d-83ad-49e4-8d89-067b19f31edc",
-                                            "type": "CategoricalAxis"
-                                        }],
-                                        "left": [{
-                                            "id": "4513e199-f6bb-4e36-97d4-e2acaf091619",
-                                            "type": "LinearAxis"
-                                        }],
-                                        "plot_height": 500,
-                                        "plot_width": 1400,
-                                        "renderers": [{
-                                            "id": "8acdf17d-83ad-49e4-8d89-067b19f31edc",
-                                            "type": "CategoricalAxis"
-                                        }, {
-                                            "id": "dc166b1f-f10c-495c-a850-be83c7b30baf",
-                                            "type": "Grid"
-                                        }, {
-                                            "id": "4513e199-f6bb-4e36-97d4-e2acaf091619",
-                                            "type": "LinearAxis"
-                                        }, {
-                                            "id": "cd96c7ab-5bd9-4365-8a69-87f20fede77b",
-                                            "type": "Grid"
-                                        }, {
-                                            "id": "420ac168-4a73-42da-8bd0-0ff00c43913f",
-                                            "type": "Legend"
-                                        }, {
-                                            "id": "a214c759-cd57-4113-90d9-d819ab53cb1f",
-                                            "type": "GlyphRenderer"
-                                        }],
-                                        "title": {
-                                            "id": "b2800d1b-286e-47d2-bd26-0fd717744a38",
-                                            "type": "Title"
-                                        },
-                                        "toolbar": {
-                                            "id": "a932be7b-1525-41ee-8fbd-4746ecf2c59f",
-                                            "type": "Toolbar"
-                                        },
-                                        "x_range": {
-                                            "id": "8f59a32c-14de-449a-a69f-584a8983e597",
-                                            "type": "FactorRange"
-                                        },
-                                        "x_scale": {
-                                            "id": "9cd906fe-2b36-4e79-bb93-3368e6e33147",
-                                            "type": "CategoricalScale"
-                                        },
-                                        "y_range": {
-                                            "id": "da3abcd8-57a6-4d9a-8c73-f180cbc7ddab",
-                                            "type": "DataRange1d"
-                                        },
-                                        "y_scale": {
-                                            "id": "bcd3d4f0-b962-47ad-ab8f-e0cfd9e7b99b",
-                                            "type": "LinearScale"
-                                        }
-                                    },
-                                    "id": "aa845577-a87f-4f95-9165-2e22461af6ac",
-                                    "subtype": "Figure",
-                                    "type": "Plot"
-                                }, {
-                                    "attributes": {},
-                                    "id": "6202433c-17e4-4047-a8f9-8654548ad268",
-                                    "type": "CategoricalTicker"
-                                }, {
-                                    "attributes": {
-                                        "fill_color": {
-                                            "field": "x",
-                                            "transform": {
-                                                "id": "92ff84b3-aa70-4493-b7c1-b8f290686556",
-                                                "type": "CategoricalColorMapper"
-                                            }
-                                        },
-                                        "line_color": {
-                                            "value": "white"
-                                        },
-                                        "top": {
-                                            "field": "counts"
-                                        },
-                                        "width": {
-                                            "value": 0.85
-                                        },
-                                        "x": {
-                                            "field": "x"
-                                        }
-                                    },
-                                    "id": "fd66f421-6838-4424-a164-d0fe8676de2c",
-                                    "type": "VBar"
-                                }, {
-                                    "attributes": {},
-                                    "id": "235f08ba-58f7-4cf2-b090-ef7b21853100",
-                                    "type": "UnionRenderers"
-                                }, {
-                                    "attributes": {
-                                        "callback": null,
-                                        "factors": [
-                                            ["Luxembourg", "original"],
-                                            ["Luxembourg", "smooth"],
-                                            ["United Kingdom", "original"],
-                                            ["United Kingdom", "smooth"],
-                                            ["Hong Kong", "original"],
-                                            ["Hong Kong", "smooth"],
-                                            ["Sweden", "original"],
-                                            ["Sweden", "smooth"],
-                                            ["Iceland", "original"],
-                                            ["Iceland", "smooth"],
-                                            ["Finland", "original"],
-                                            ["Finland", "smooth"],
-                                            ["Taiwan", "original"],
-                                            ["Taiwan", "smooth"],
-                                            ["Ireland", "original"],
-                                            ["Ireland", "smooth"],
-                                            ["Australia", "original"],
-                                            ["Australia", "smooth"],
-                                            ["Italy", "original"],
-                                            ["Italy", "smooth"],
-                                            ["Chile", "original"],
-                                            ["Chile", "smooth"],
-                                            ["Czech Republic", "original"],
-                                            ["Czech Republic", "smooth"],
-                                            ["New Zealand", "original"],
-                                            ["New Zealand", "smooth"],
-                                            ["Egypt", "original"],
-                                            ["Egypt", "smooth"],
-                                            ["Israel", "original"],
-                                            ["Israel", "smooth"],
-                                            ["Qatar", "original"],
-                                            ["Qatar", "smooth"],
-                                            ["Turkey", "original"],
-                                            ["Turkey", "smooth"],
-                                            ["Spain", "original"],
-                                            ["Spain", "smooth"]
-                                        ]
-                                    },
-                                    "id": "8f59a32c-14de-449a-a69f-584a8983e597",
-                                    "type": "FactorRange"
-                                }, {
-                                    "attributes": {
-                                        "grid_line_color": {
-                                            "value": "lightgrey"
-                                        },
-                                        "plot": {
-                                            "id": "aa845577-a87f-4f95-9165-2e22461af6ac",
-                                            "subtype": "Figure",
-                                            "type": "Plot"
-                                        },
-                                        "ticker": {
-                                            "id": "6202433c-17e4-4047-a8f9-8654548ad268",
-                                            "type": "CategoricalTicker"
-                                        }
-                                    },
-                                    "id": "dc166b1f-f10c-495c-a850-be83c7b30baf",
-                                    "type": "Grid"
-                                }, {
-                                    "attributes": {
-                                        "fill_alpha": {
-                                            "value": 0.1
-                                        },
-                                        "fill_color": {
-                                            "value": "#1f77b4"
-                                        },
-                                        "line_alpha": {
-                                            "value": 0.1
-                                        },
-                                        "line_color": {
-                                            "value": "#1f77b4"
-                                        },
-                                        "top": {
-                                            "field": "counts"
-                                        },
-                                        "width": {
-                                            "value": 0.85
-                                        },
-                                        "x": {
-                                            "field": "x"
-                                        }
-                                    },
-                                    "id": "c3875aab-212b-4001-9876-b54582f5d11b",
-                                    "type": "VBar"
-                                }, {
-                                    "attributes": {
-                                        "source": {
-                                            "id": "d123f9af-fef2-44fd-8a1d-0c8a089a18a3",
-                                            "type": "ColumnDataSource"
-                                        }
-                                    },
-                                    "id": "0266c7b7-0531-443e-9e3d-95d108b2dde5",
-                                    "type": "CDSView"
-                                }, {
-                                    "attributes": {
-                                        "callback": null,
-                                        "renderers": "auto",
-                                        "tooltips": [
-                                            ["country", "@locations"],
-                                            ["# top 1000", "@some"],
-                                            ["# alles", "@all"],
-                                            ["original", "@pc"],
-                                            ["smooth", "@pc_smooth"]
-                                        ]
-                                    },
-                                    "id": "5b137222-3f01-4fa1-880b-25182b5b0e61",
-                                    "type": "HoverTool"
-                                }, {
-                                    "attributes": {
-                                        "dimension": 1,
-                                        "plot": {
-                                            "id": "aa845577-a87f-4f95-9165-2e22461af6ac",
-                                            "subtype": "Figure",
-                                            "type": "Plot"
-                                        },
-                                        "ticker": {
-                                            "id": "e18b3d6e-b608-48f5-a476-78a918258ace",
-                                            "type": "BasicTicker"
-                                        }
-                                    },
-                                    "id": "cd96c7ab-5bd9-4365-8a69-87f20fede77b",
-                                    "type": "Grid"
-                                }, {
-                                    "attributes": {},
-                                    "id": "ddb21a3d-d1ea-4291-8b8c-58fb3c486832",
-                                    "type": "BasicTickFormatter"
-                                }, {
-                                    "attributes": {
-                                        "end": 2,
-                                        "factors": ["original", "smooth"],
-                                        "palette": ["#0066cc", "#b3d9ff"],
-                                        "start": 1
-                                    },
-                                    "id": "92ff84b3-aa70-4493-b7c1-b8f290686556",
-                                    "type": "CategoricalColorMapper"
-                                }],
-                                "root_ids": ["aa845577-a87f-4f95-9165-2e22461af6ac"]
-                            },
-                            "title": "Bokeh Application",
-                            "version": "0.13.0"
-                        }
-                    }
+                <script type="application/json" id="37f15da3-7363-44ba-a9f7-7bed57912e1a">
+                  {"de9da199-32af-491c-a574-b42fccef9df9":{"roots":{"references":[{"attributes":{},"id":"8e66c659-6d63-4a59-ac11-6f83c50886d6","type":"BasicTickFormatter"},{"attributes":{},"id":"431cdb92-f1c2-4a6a-95e3-bc3ab8a55bc1","type":"CategoricalTicker"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"height":{"value":0.85},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"right":{"field":"pc_smooth"},"y":{"field":"locations"}},"id":"52de8f23-7758-4f39-b1c9-36b6240242b8","type":"HBar"},{"attributes":{"below":[{"id":"f246b2e2-3ede-4e3f-a390-af6acfa8ecf9","type":"LinearAxis"}],"left":[{"id":"ae8309f8-919f-4f87-b641-9980080bec71","type":"CategoricalAxis"}],"plot_height":3000,"plot_width":900,"renderers":[{"id":"f246b2e2-3ede-4e3f-a390-af6acfa8ecf9","type":"LinearAxis"},{"id":"a61075f0-cdee-4b86-aeff-9c1fc645b3ca","type":"Grid"},{"id":"ae8309f8-919f-4f87-b641-9980080bec71","type":"CategoricalAxis"},{"id":"a00f53d1-1af0-4c2b-9ebb-15a6d98301c4","type":"Grid"},{"id":"ad96c89f-781f-40ff-91d0-b5c1bff58a7d","type":"Legend"},{"id":"6a079616-fe73-433d-989e-50300eaa5988","type":"GlyphRenderer"},{"id":"37957f39-a794-4e0e-9627-6da60bcecc9d","type":"GlyphRenderer"}],"title":{"id":"657ae83f-d38b-4e0c-88a9-2f0a35ba6e05","type":"Title"},"toolbar":{"id":"7dbb62a8-21b0-436e-9c8c-c0880a79c495","type":"Toolbar"},"x_range":{"id":"9a374f8b-7b14-4ea3-b65c-0b3c5f86c526","type":"DataRange1d"},"x_scale":{"id":"5145a346-581b-4706-a5c5-02e274bba2e4","type":"LinearScale"},"y_range":{"id":"009ba712-2bca-47a0-81d1-0553da35b040","type":"FactorRange"},"y_scale":{"id":"52e4b600-2193-4088-ac6c-41a141177dd3","type":"CategoricalScale"}},"id":"9e25e30c-2f89-4532-bb62-f9df13a007ee","subtype":"Figure","type":"Plot"},{"attributes":{"dimension":1,"plot":{"id":"9e25e30c-2f89-4532-bb62-f9df13a007ee","subtype":"Figure","type":"Plot"},"ticker":{"id":"431cdb92-f1c2-4a6a-95e3-bc3ab8a55bc1","type":"CategoricalTicker"}},"id":"a00f53d1-1af0-4c2b-9ebb-15a6d98301c4","type":"Grid"},{"attributes":{"callback":null,"factors":["Philippines","Nigeria","Kenya","Indonesia","Argentina","Bangladesh","Peru","India","Tunisia","Algeria","Mexico","Ukraine","Georgia","Morocco","Ghana","Costa Rica","Colombia","Belarus","Bulgaria","Sri Lanka","Russian Federation","Brazil","Malaysia","Uganda","Lebanon","China","Poland","Iran","Oman","Pakistan","Latvia","Croatia","Venezuela","Singapore","Lithuania","Romania","United States","France","Thailand","Slovenia","South Africa","Estonia","South Korea","Canada","United Arab Emirates","Portugal","Kuwait","Jordan","Saudi Arabia","Japan","Greece","Slovakia","Denmark","Belgium","Netherlands","Norway","Germany","Hungary","Switzerland","Cyprus","Macao","Austria","Spain","Turkey","Qatar","Israel","Egypt","New Zealand","Chile","Czech Republic","Italy","Australia","Ireland","Taiwan","Finland","Iceland","Sweden","Hong Kong","United Kingdom","Luxembourg"]},"id":"009ba712-2bca-47a0-81d1-0553da35b040","type":"FactorRange"},{"attributes":{"items":[{"id":"e0aa0908-1b09-4ed8-a4c8-2883edbaef8c","type":"LegendItem"},{"id":"c12d9b22-b5e0-4794-90df-a8ed00a745b1","type":"LegendItem"}],"location":"top_left","plot":{"id":"9e25e30c-2f89-4532-bb62-f9df13a007ee","subtype":"Figure","type":"Plot"}},"id":"ad96c89f-781f-40ff-91d0-b5c1bff58a7d","type":"Legend"},{"attributes":{},"id":"5145a346-581b-4706-a5c5-02e274bba2e4","type":"LinearScale"},{"attributes":{"source":{"id":"a1f35f5e-3a9f-46a1-8e37-48ba8055cf4b","type":"ColumnDataSource"}},"id":"3fe5cd44-387d-4477-bf29-fb8e09520ae2","type":"CDSView"},{"attributes":{"label":{"value":"divided by total universities"},"renderers":[{"id":"6a079616-fe73-433d-989e-50300eaa5988","type":"GlyphRenderer"}]},"id":"e0aa0908-1b09-4ed8-a4c8-2883edbaef8c","type":"LegendItem"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"height":{"value":0.85},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"right":{"field":"pc"},"y":{"field":"locations"}},"id":"3c50de98-0b5d-44b8-837a-efd7636f8e2b","type":"HBar"},{"attributes":{},"id":"52e4b600-2193-4088-ac6c-41a141177dd3","type":"CategoricalScale"},{"attributes":{},"id":"b27df87f-93c5-45c4-9ddc-a4eff7b5cde5","type":"UnionRenderers"},{"attributes":{"fill_color":{"value":"#D32F2F"},"height":{"value":0.85},"line_color":{"value":"#D32F2F"},"right":{"field":"pc"},"y":{"field":"locations"}},"id":"be3076d5-1c49-43e8-a990-d4a7ad3b7552","type":"HBar"},{"attributes":{"data_source":{"id":"a1f35f5e-3a9f-46a1-8e37-48ba8055cf4b","type":"ColumnDataSource"},"glyph":{"id":"be3076d5-1c49-43e8-a990-d4a7ad3b7552","type":"HBar"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"3c50de98-0b5d-44b8-837a-efd7636f8e2b","type":"HBar"},"selection_glyph":null,"view":{"id":"cd290498-3b33-4650-8606-e9ae141d4571","type":"CDSView"}},"id":"6a079616-fe73-433d-989e-50300eaa5988","type":"GlyphRenderer"},{"attributes":{"label":{"value":"divided by total universities + 1"},"renderers":[{"id":"37957f39-a794-4e0e-9627-6da60bcecc9d","type":"GlyphRenderer"}]},"id":"c12d9b22-b5e0-4794-90df-a8ed00a745b1","type":"LegendItem"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_scroll":"auto","active_tap":"auto","tools":[{"id":"7a3182f0-4e14-41b5-9a4a-aa789a5d4991","type":"HoverTool"}]},"id":"7dbb62a8-21b0-436e-9c8c-c0880a79c495","type":"Toolbar"},{"attributes":{"formatter":{"id":"d11271cc-b423-494d-80ed-d1f4a6c70513","type":"CategoricalTickFormatter"},"plot":{"id":"9e25e30c-2f89-4532-bb62-f9df13a007ee","subtype":"Figure","type":"Plot"},"ticker":{"id":"431cdb92-f1c2-4a6a-95e3-bc3ab8a55bc1","type":"CategoricalTicker"}},"id":"ae8309f8-919f-4f87-b641-9980080bec71","type":"CategoricalAxis"},{"attributes":{"formatter":{"id":"8e66c659-6d63-4a59-ac11-6f83c50886d6","type":"BasicTickFormatter"},"plot":{"id":"9e25e30c-2f89-4532-bb62-f9df13a007ee","subtype":"Figure","type":"Plot"},"ticker":{"id":"b5235131-ea93-4fa5-acac-3bea41e51297","type":"BasicTicker"}},"id":"f246b2e2-3ede-4e3f-a390-af6acfa8ecf9","type":"LinearAxis"},{"attributes":{},"id":"d11271cc-b423-494d-80ed-d1f4a6c70513","type":"CategoricalTickFormatter"},{"attributes":{"data_source":{"id":"a1f35f5e-3a9f-46a1-8e37-48ba8055cf4b","type":"ColumnDataSource"},"glyph":{"id":"5c962d8f-d59d-4fb6-9aa0-cac19695d431","type":"HBar"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"52de8f23-7758-4f39-b1c9-36b6240242b8","type":"HBar"},"selection_glyph":null,"view":{"id":"3fe5cd44-387d-4477-bf29-fb8e09520ae2","type":"CDSView"}},"id":"37957f39-a794-4e0e-9627-6da60bcecc9d","type":"GlyphRenderer"},{"attributes":{},"id":"b5235131-ea93-4fa5-acac-3bea41e51297","type":"BasicTicker"},{"attributes":{"plot":null,"text":"percentage of universities in top 1000"},"id":"657ae83f-d38b-4e0c-88a9-2f0a35ba6e05","type":"Title"},{"attributes":{"source":{"id":"a1f35f5e-3a9f-46a1-8e37-48ba8055cf4b","type":"ColumnDataSource"}},"id":"cd290498-3b33-4650-8606-e9ae141d4571","type":"CDSView"},{"attributes":{"grid_line_color":{"value":"lightgrey"},"plot":{"id":"9e25e30c-2f89-4532-bb62-f9df13a007ee","subtype":"Figure","type":"Plot"},"ticker":{"id":"b5235131-ea93-4fa5-acac-3bea41e51297","type":"BasicTicker"}},"id":"a61075f0-cdee-4b86-aeff-9c1fc645b3ca","type":"Grid"},{"attributes":{},"id":"ccc2409a-6510-423b-8172-8390c249c2b4","type":"Selection"},{"attributes":{"callback":null},"id":"9a374f8b-7b14-4ea3-b65c-0b3c5f86c526","type":"DataRange1d"},{"attributes":{"fill_color":{"value":"#ea8a8a"},"height":{"value":0.85},"line_color":{"value":"#ea8a8a"},"right":{"field":"pc_smooth"},"y":{"field":"locations"}},"id":"5c962d8f-d59d-4fb6-9aa0-cac19695d431","type":"HBar"},{"attributes":{"callback":null,"renderers":"auto","tooltips":[["country","@locations"],["# top 1000","@some"],["# alles","@all"],["original","@pc"],["smooth","@pc_smooth"]]},"id":"7a3182f0-4e14-41b5-9a4a-aa789a5d4991","type":"HoverTool"},{"attributes":{"callback":null,"data":{"all":[266,219,137,487,118,115,99,4004,189,86,931,342,64,181,60,59,289,57,56,53,1306,1507,403,44,42,2310,426,605,33,315,56,50,70,44,44,105,3281,562,180,35,124,30,375,352,51,114,12,35,56,985,77,33,77,84,136,52,454,72,101,20,10,76,252,169,7,41,61,53,80,80,235,199,47,159,44,9,46,22,285,3],"locations":["Philippines","Nigeria","Kenya","Indonesia","Argentina","Bangladesh","Peru","India","Tunisia","Algeria","Mexico","Ukraine","Georgia","Morocco","Ghana","Costa Rica","Colombia","Belarus","Bulgaria","Sri Lanka","Russian Federation","Brazil","Malaysia","Uganda","Lebanon","China","Poland","Iran","Oman","Pakistan","Latvia","Croatia","Venezuela","Singapore","Lithuania","Romania","United States","France","Thailand","Slovenia","South Africa","Estonia","South Korea","Canada","United Arab Emirates","Portugal","Kuwait","Jordan","Saudi Arabia","Japan","Greece","Slovakia","Denmark","Belgium","Netherlands","Norway","Germany","Hungary","Switzerland","Cyprus","Macao","Austria","Spain","Turkey","Qatar","Israel","Egypt","New Zealand","Chile","Czech Republic","Italy","Australia","Ireland","Taiwan","Finland","Iceland","Sweden","Hong Kong","United Kingdom","Luxembourg"],"pc":{"__ndarray__":"9oDZA2YP2D+U01FORzndPxwpGuKPW+c/O8ezxopI6j8EDSd1Xx7rP73pTW960+s/f6VArV8p8D8rmCXlgMjwP+YOmTtk7vA/p6wpa8qa8j8LUwYDh+fyP0R2E9lNZPc/AAAAAAAA+T9Byk1F84T6P6uqqqqqqvo/BA0ndV8e+z/N+SZUga77Px/BfQT3Efw/JEmSJEmS/D+u7HNITTD+P2r1Rjf/iQBAWu+1u8X8AEBnT1GAst0BQC+66KKLLgJAwzAMwzAMA0DRRRdddNEFQCHRCpsDiQZAKky8HznNB0A++OCDDz4IQFmWZVmWZQlAJEmSJEmSDEAAAAAAAAAQQEmSJEmSJBFAL7rooosuEkAvuuiiiy4SQMMwDMMwDBNA8WiPMvgjE0D0PRwJZhAWQI7jOI7jOBZAt23btm3bFkDOOeecc84ZQKuqqqqqqhpAzMzMzMzMHECMLrrooosdQF9fX19fXx9AQ3kN5TWUH0CqqqqqqqogQEmSJEmSJCFAt23btm3bIUD5QHZhMRIiQC+66KKLLiJAL7rooosuIkAvuuiiiy4iQMMwDMMwDCNAHh4eHh4eI0CyEzuxEzsjQCl0U1IdYiNAHcdxHMdxI0DfiAKTTs0jQAAAAAAAACRAAAAAAAAAJEDXUF5DeQ0lQEEQBEEQBCdACAPOuBYJKkAkSZIkSZIsQETtStSuRC1Am/cpLhmCLUCu7HNITTAuQAAAAAAAQDBAAAAAAABAMEDE5ApicgUxQJQLUTeDljFAXUFMriAmM0DbiHXpMX8zQHXRRRdddDRAjuM4juM4NkDf9KY3vek3QEUXXXTRRTtADuU1lNdQQECqqqqqqqpAQA==","dtype":"float64","shape":[80]},"pc_smooth":{"__ndarray__":"gFHhX1T41z8XXXTRRRfdP3PtwFw7MOc//BSXDME66j+bCOSaCOTqPxphuacRlus/AAAAAAAA8D8NuR1DbsfwP3kN5TWU1/A/vEAmxQtk8j+uEhezVeLyP0IxcnHYUvc/2Ymd2Imd+D/7pV/6pV/6P/wUlwzBOvo/q6qqqqqq+j8aYbmnEZb7PxphuacRlvs/H8F9BPcR/D8S2ktoL6H9PxQ14+jBhgBAwTvoeuP5AECV4RtRYNIBQHIcx3EcxwFAp6wpa8qaAkCGwSujCc8FQCFbOOaAewZActfPFivDB0CHh4eHh4cHQKLSkT0DUQlAH8F9BPcRDEBfX19fX18PQNgcSLTC5hBAchzHcRzHEUByHMdxHMcRQO1zSE0w3hJAPqJw/nkiE0DKrGyrXQYWQOF9a2R1GRZAjuM4juM4FkCamZmZmZkZQM4555xzzhlADGJyBTG5HEAoyGyqNXYdQE/sxE7sxB5A9qY3velNH0BP7MRO7MQeQKqqqqqqqiBAs5jOYjqLIUCbbndCgA0iQC7f8i3f8iFApqWlpaWlIUAu3/It3/IhQNPS0tLS0iJAZkG152T6IkDtc0hNMN4iQHQ1V3M1VyNA2bJly5YtI0Ccm5ubm5sjQMMwDMMwDCNAL7rooosuIkDsHVMDe8ckQMDq+FLG7CZA4+Hh4eHhKUAAAAAAAAApQCRJkiRJkixACSGEEEIILUAS2ktoL6EtQHVrflikDDBAdWt+WKQMMEAiaDip+/IwQAAAAAAAgDFAAAAAAADAMkAAAAAAAGAzQAAAAAAAADRAAAAAAAAANECO+s5GfWc3QCELWchCFjpAaWv83TxCQEAAAAAAAAA5QA==","dtype":"float64","shape":[80]},"some":[1,1,1,4,1,1,1,42,2,1,11,5,1,3,1,1,5,1,1,1,27,32,9,1,1,63,12,18,1,10,2,2,3,2,2,5,157,31,10,2,8,2,27,26,4,9,1,3,5,89,7,3,7,8,13,5,44,7,10,2,1,8,29,22,1,6,9,8,13,13,40,35,9,31,9,2,11,6,93,1]},"selected":{"id":"ccc2409a-6510-423b-8172-8390c249c2b4","type":"Selection"},"selection_policy":{"id":"b27df87f-93c5-45c4-9ddc-a4eff7b5cde5","type":"UnionRenderers"}},"id":"a1f35f5e-3a9f-46a1-8e37-48ba8055cf4b","type":"ColumnDataSource"}],"root_ids":["9e25e30c-2f89-4532-bb62-f9df13a007ee"]},"title":"Bokeh Application","version":"0.12.16"}}
                 </script>
                 <script type="text/javascript">
-                    (function() {
-                        var fn = function() {
-                            Bokeh.safely(function() {
-                                (function(root) {
-                                    function embed_document(root) {
+                  (function() {
+                    var fn = function() {
+                      Bokeh.safely(function() {
+                        (function(root) {
+                          function embed_document(root) {
 
-                                        var docs_json = document.getElementById('1175f612-aec7-4ccd-82dc-6bda2be50870').textContent;
-                                        var render_items = [{
-                                            "docid": "2cef8e51-1e91-4bd6-bd82-e46b74471f96",
-                                            "roots": {
-                                                "aa845577-a87f-4f95-9165-2e22461af6ac": "7e115bb6-ec98-42ae-83e3-73fdbafa37bf"
-                                            }
-                                        }];
-                                        root.Bokeh.embed.embed_items(docs_json, render_items);
+                          var docs_json = document.getElementById('37f15da3-7363-44ba-a9f7-7bed57912e1a').textContent;
+                          var render_items = [{"docid":"de9da199-32af-491c-a574-b42fccef9df9","elementid":"2f105da1-b135-4ef4-a1b6-527f3af575fe","modelid":"9e25e30c-2f89-4532-bb62-f9df13a007ee"}];
+                          root.Bokeh.embed.embed_items(docs_json, render_items);
 
-                                    }
-                                    if (root.Bokeh !== undefined) {
-                                        embed_document(root);
-                                    } else {
-                                        var attempts = 0;
-                                        var timer = setInterval(function(root) {
-                                            if (root.Bokeh !== undefined) {
-                                                embed_document(root);
-                                                clearInterval(timer);
-                                            }
-                                            attempts++;
-                                            if (attempts > 100) {
-                                                console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing")
-                                                clearInterval(timer);
-                                            }
-                                        }, 10, root)
-                                    }
-                                })(window);
-                            });
-                        };
-                        if (document.readyState != "loading") fn();
-                        else document.addEventListener("DOMContentLoaded", fn);
-                    })();
+                          }
+                          if (root.Bokeh !== undefined) {
+                            embed_document(root);
+                          } else {
+                            var attempts = 0;
+                            var timer = setInterval(function(root) {
+                              if (root.Bokeh !== undefined) {
+                                embed_document(root);
+                                clearInterval(timer);
+                              }
+                              attempts++;
+                              if (attempts > 100) {
+                                console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing")
+                                clearInterval(timer);
+                              }
+                            }, 10, root)
+                          }
+                        })(window);
+                      });
+                    };
+                    if (document.readyState != "loading") fn();
+                    else document.addEventListener("DOMContentLoaded", fn);
+                  })();
                 </script>
             </div>
         </div>

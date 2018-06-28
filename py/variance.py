@@ -16,7 +16,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 def update_graphs(attr, old, new):
     dropdown.label = dropdown.value.replace('var_', '').replace('_', ' ')
     f1.x_range.factors = list(df_scores_var.groupby(['location']).mean().sort_values(dropdown.value, ascending=False).index.values)
-    f.x_range.factors = list(df_scores_var.sort_values(dropdown.value, ascending=False)['name'])
+    f.y_range.factors = list(df_scores_var.sort_values(dropdown.value)['name'])
     f2.x_range.factors = list(df_scores_var.nlargest(10, dropdown.value)['name'])
     f3.x_range.factors = list(df_scores_var.nsmallest(10, dropdown.value)['name'])
     f1.title.text = 'Variance {} per country from 2011 to 2018'.format(dropdown.value).replace('var_', '').replace('_', ' ')
@@ -99,7 +99,7 @@ dropdown = Dropdown(label="Category", button_type="warning", menu=[('citations',
 dropdown.on_change('value', update_graphs)
 
 
-curdoc().add_root(column(f, row(f1, f2, f3, dropdown)))
+curdoc().add_root(row(f,column(dropdown,f1,f2,f3)))
 curdoc().title = "Variance scores Universities"
 
 script = server_document("http://localhost:5006/variance")
