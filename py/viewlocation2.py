@@ -6,9 +6,10 @@ import bokeh.palettes
 from bokeh.plotting import figure
 from bokeh.io import output_file, show, curdoc
 from bokeh.models import DataRange1d
-from bokeh.layouts import column, widgetbox, gridplot
+from bokeh.layouts import column, widgetbox, gridplot, row
 from bokeh.models.widgets import MultiSelect, Paragraph
 from bokeh.palettes import Spectral6
+from bokeh.embed import components, server_document
 
 import pandas
 
@@ -42,7 +43,7 @@ def update(attrname, old, new):
         h.circle(x = international, y = boiz,color = color_list[0],legend=[uni for uni in multi_select.value])
         g.circle(x= boiz,y=size, color = color_list[0],legend=[uni for uni in multi_select.value])
         color_list = color_list[1:]
-        
+
     # next(color_list)
 
         # myString += '\n' + i
@@ -50,7 +51,7 @@ def update(attrname, old, new):
 
 multi_locations = sorted(list(df18['location'].unique()),key=str.upper,reverse=True)
 multi_select = MultiSelect(title="Country:", value=["0"], size=7,
-                           options=multi_locations)
+                           options=multi_locations, height=200)
 # myText = Paragraph(text='Initial Text', width=1200)
 multi_select.on_change('value', update)
 multi_select_widgetbox = widgetbox(multi_select)
@@ -78,5 +79,9 @@ g.x_range=DataRange1d(start=0, end=100)
 g.y_range=DataRange1d(start=0, end=300000)
 
 # gridplot alle 3 figuren en de widgetbox
-l=gridplot([[multi_select_widgetbox,None,None],[f,h,g]])
-curdoc().add_root(l)
+f.plot_width, f.plot_height, h.plot_width, h.plot_height, g.plot_width, g.plot_height = 400,400,400,400,400,400
+l=gridplot([[multi_select_widgetbox],[f,h,g]])
+curdoc().add_root(column(row(f, h, g), multi_select_widgetbox))
+
+script = server_document("http://localhost:5006/location")
+print(script)

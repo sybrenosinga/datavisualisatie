@@ -3,11 +3,10 @@ import numpy as np
 
 from bokeh.plotting import figure
 from bokeh.io import output_file, show
-from bokeh.models import DataRange1d,FactorRange
+from bokeh.models import DataRange1d
 from bokeh.layouts import gridplot
 from bokeh.plotting import figure, output_file, show, ColumnDataSource
 from bokeh.models import HoverTool
-from bokeh.transform import factor_cmap
 
 import pandas
 
@@ -27,6 +26,8 @@ alles = pd.read_csv('../Data_csv/all_universities.csv')
 #  landen en unis in de top 1000
 hoi = df18[df18.location != 'Northern Cyprus']
 top = hoi['location'].value_counts()
+
+# print(hoi)
 
 # landen en alle unis, met de landen in de zelfde volgorde als top
 all_unis = []
@@ -67,7 +68,8 @@ for i in getal*100:
 
 sorted_pc = np.sort(percentage_in_top)
 sorted_pc_smooth = np.sort(pc_in_top_smooth)
-
+# print(sorted_pc)
+# countries = hoi['location'].unique()
 unidb= pd.DataFrame()
 unidb['country'] = hoi['location'].unique()
 unidb = unidb.assign(pc = percentage_in_top)
@@ -75,11 +77,13 @@ unidb = unidb.assign(some = some_unis)
 unidb = unidb.assign(all = all_unis)
 unidb = unidb.assign(pc_smooth = pc_in_top_smooth)
 
-# maak plot
+# print(unidb)
+
+# maak plotje
 output_file('./percountry.html')
 
 # sort database
-unidb_sorted = unidb.sort_values(by=['pc'], ascending = False)
+unidb_sorted = unidb.sort_values(by=['pc'])
 
 # prepare data
 xas=unidb_sorted.country.unique()
@@ -88,34 +92,13 @@ yas_smooth=unidb_sorted['pc_smooth']
 some_unis_sorted = unidb_sorted['some']
 all_unis_sorted = unidb_sorted['all']
 
-yas_list = []
-for i in yas:
-    yas_list.append(i)
-
-yas_smooth_list = []
-for i in yas_smooth:
-    yas_smooth_list.append(i)
-
-locations = xas
-pcs = ['original', 'smooth']
-
-data = {'locations':locations,
-        'y':yas_list,
-        'y smooth':yas_smooth_list}
-
-
-x = [(location, pc) for location in locations[:18] for pc in pcs[:18] ]
-counts = sum(zip(data['y'] ,data['y smooth']), ())
-
 # prepare tooltip
 source = ColumnDataSource(data=dict(
-    x=x[:36],
-    counts=counts[:36],
-    locations=[i for i in xas for _ in (0, 1)][:36],
-    pc=[i for i in yas for _ in (0, 1)][:36],
-    pc_smooth=[i for i in yas_smooth for _ in (0, 1)][:36],
-    some=[i for i in some_unis_sorted for _ in (0, 1)][:36],
-    all=[i for i in all_unis_sorted for _ in (0, 1)][:36],
+    locations=xas,
+    pc=yas,
+    pc_smooth=yas_smooth,
+    some=some_unis_sorted,
+    all=all_unis_sorted,
 ))
 
 hover = HoverTool(tooltips=[
@@ -126,12 +109,23 @@ hover = HoverTool(tooltips=[
     ("smooth", "@pc_smooth")
 ])
 
-f = figure(x_range=FactorRange(*x), plot_width=1800 , plot_height = 500, tools =[hover],title="percentage of universities in top 1000")
-f.vbar(x='x', top='counts', legend = 'percentage of universities',line_color= 'white', fill_color=factor_cmap('x', palette=['#0066cc','#b3d9ff'], factors=pcs, start=1, end=2), width=0.85, source=source)
+# p = figure(x_range=xas, plot_width=1800, tools = [hover], plot_height = 500,title="amount of universities in top 1000 / amount of universites in total")
+# p.vbar(x='locations', top='pc',source=source, line_color= 'black',width=0.9)
+#
+# p.xgrid.grid_line_color = 'lightgrey'
+# p.xaxis.major_label_orientation = 1
+# p.y_range.start = 0
+# p.y_range=DataRange1d(start=0, end=35)
+
+f = figure(y_range=xas, plot_width=900 , plot_height = 3000, tools = [hover],title="percentage of universities in top 1000")
+f.hbar(y='locations', left=0, right='pc', color ='#D32F2F', legend = 'divided by total universities', height=0.85, source=source)
+f.hbar(y='locations', left=0, right='pc_smooth',  color= '#ea8a8a', legend = 'divided by total universities + 1', height=0.85, source=source)
+f.legend.location='top_left'
+
 
 f.xgrid.grid_line_color = 'lightgrey'
-f.xaxis.major_label_orientation = 1
-f.y_range.start = 0
-f.y_range=DataRange1d(start=0, end=35)
+# f.xaxis.major_label_orientation = 1
+# f.y_range.start = 0
+# f.y_range=DataRange1d(start=0, end=35)
 
 show(f)
