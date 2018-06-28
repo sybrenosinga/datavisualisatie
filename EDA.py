@@ -13,72 +13,106 @@ df11 = pandas.read_csv('./Data_csv/data_2011.csv').set_index('nid')
 
 df_dict = {2011:df11,2012:df12,2013:df13,2014:df14,2015:df15,2016:df16,2017:df17,2018:df18}
 
-# print(df18.loc[:,['name', 'rank_order', 'scores_industry_income']].set_index('name').sort_values(by='rank_order'))
+# print(df18['student'])
+# def graph_columns (df):
 
-# frames = [df11,df12,df13,df14,df15,df16,df17,df18]
-# result = pandas.concat(frames).sort_index()
-# print(result)
+#     output_file("df18.html")
 
-# df = df11.loc[:,['name', 'subject']]
-# result = df.append(df13)
-# print(result.sort_index())
+#     citations = figure(width=400, plot_height=250, title='citations')
+#     citations.vbar(x=range(1,200), width=1, bottom=0,
+#     top=df['scores_citations'], color="navy")
 
-# print(df18.columns.tolist)
+#     industry_income = figure(width=400, plot_height=250, title='industry income')
+#     industry_income.vbar(x=range(1,200), width=1, bottom=0,
+#         top=df['scores_industry_income'], color="navy")
 
-df = pandas.DataFrame()
-for key in df_dict:
-    temp = df_dict[key].loc[:,['name', 'rank']].set_index('name')
-    print(temp)
-print(df)
+#     international_outlook = figure(width=400, plot_height=250, title='international outlook')
+#     international_outlook.vbar(x=range(1,200), width=1, bottom=0,
+#         top=df['scores_international_outlook'], color="navy")
 
-# df = df18[df18.rank_order < 201].loc[:,['name', 'rank', 'subjects_offered']].set_index('name')
-# df['course_count'] = df['subjects_offered'].str.split(",").str.len()
-# print(df.sort_values(by=['course_count']))
+#     research = figure(width=400, plot_height=250, title='research')
+#     research.vbar(x=range(1,200), width=1, bottom=0,
+#         top=df['scores_research'], color="navy")
 
-
-# df = df18[df18.rank_order < 201].loc[:,['name', 'subjects_offered']].set_index('name')
-# df['course_count'] = df['subjects_offered'].str.split(",").str.len()
-# print(df.sort_values(by=['course_count']))
+#     teaching = figure(width=400, plot_height=250, title='teaching')
+#     teaching.vbar(x=range(1,200), width=1, bottom=0,
+#         top=df['scores_teaching'], color="navy")
 
 
-# def count_courses(df):
-#     df_subjects = df.loc[:,['name','subjects_offered']].set_index('name')
-#     return df_subjects
+#     # p = vplot(citations,industry_income,international_outlook,research,teaching,overall)
 
-# print(count_courses(df11))
-# def count_courses(series):
-#     return len
-# output to static HTML file
+#     show(citations)
+#     show(industry_income)
+#     show(international_outlook)
+#     show(research)
+#     show(teaching)
+
+# graph_columns(df18)
 
 
-# def course_count(df_dict):
-#     for key in df_dict:
-#          = value for key
-#         df_subjects = df.loc[:,['name','subjects_offered']].set_index('name')
-#     return df_subjects
 
-# print(course_count(df_dict))
+# # print(df18.loc[:,['name', 'rank_order', 'scores_industry_income']].set_index('name').sort_values(by='rank_order'))
 
-frames = []
-total_courses = df_dict.get(2011)
+# # frames = [df11,df12,df13,df14,df15,df16,df17,df18]
+# # result = pandas.concat(frames).sort_index()
+# # print(result)
 
-# count unique courses, calculate increase over years and compare
-# place following in new dataframe, where index is uni name and colums are: total courses YEAR, total growth rate YEAR, new courses YEAR, removed courses YEAR, yearly growth rate YEAR
-# 1 fetch courses starting year
-# 2 store course list, count courses
-# 3 fetch courses following year
-# 4 count new courses, count removed courses, count growth rate
-# 5 update course list, count courses, calculate increase
-# 6 repeat from 3
+# # df = df11.loc[:,['name', 'subject']]
+# # result = df.append(df13)
+# # print(result.sort_index())
 
-# print(df18.columns.tolist())
+print(df18.columns.tolist)
+print(df18['stats_student_staff_ratio'])
 
-# def check_id(df):
-#     return df.loc[:,['name', 'nid']]
 
-# frames = [check_id(df) for df in df_dict]
-# result = pandas.concat(frames).drop_duplicates(subset='name').reset_index(drop=True)
-# print(result.sort_values(by='nid'))
+# # df = df18[df18.rank_order < 201].loc[:,['name', 'rank', 'subjects_offered']].set_index('name')
+# # df['course_count'] = df['subjects_offered'].str.split(",").str.len()
+# # print(df.sort_values(by=['course_count']))
+
+
+# # df = df18[df18.rank_order < 201].loc[:,['name', 'subjects_offered']].set_index('name')
+# # df['course_count'] = df['subjects_offered'].str.split(",").str.len()
+# # print(df.sort_values(by=['course_count']))
+
+
+# # def count_courses(df):
+# #     df_subjects = df.loc[:,['name','subjects_offered']].set_index('name')
+# #     return df_subjects
+
+# # print(count_courses(df11))
+# # def count_courses(series):
+# #     return len
+# # output to static HTML file
+
+
+# # def course_count(df_dict):
+# #     for key in df_dict:
+# #          = value for key
+# #         df_subjects = df.loc[:,['name','subjects_offered']].set_index('name')
+# #     return df_subjects
+
+# # print(course_count(df_dict))
+
+# frames = []
+# total_courses = df_dict.get(2011)
+
+# # count unique courses, calculate increase over years and compare
+# # place following in new dataframe, where index is uni name and colums are: total courses YEAR, total growth rate YEAR, new courses YEAR, removed courses YEAR, yearly growth rate YEAR
+# # 1 fetch courses starting year
+# # 2 store course list, count courses
+# # 3 fetch courses following year
+# # 4 count new courses, count removed courses, count growth rate
+# # 5 update course list, count courses, calculate increase
+# # 6 repeat from 3
+
+# # print(df18.columns.tolist())
+
+# # def check_id(df):
+# #     return df.loc[:,['name', 'nid']]
+
+# # frames = [check_id(df) for df in df_dict]
+# # result = pandas.concat(frames).drop_duplicates(subset='name').reset_index(drop=True)
+# # print(result.sort_values(by='nid'))
 
 
 # def course_expansion(df_list):

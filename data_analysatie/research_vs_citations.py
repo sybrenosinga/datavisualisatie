@@ -20,11 +20,13 @@ df18 = pd.read_csv('../Data_csv/data_2018.csv')
 # compare international students and rank
     # want trekt een betere uni meer internationale mensen aan?
 
-output_file("outlook_vs_industry_income.html")
+output_file("research_vs_citations.html")
 
 # values
-outlook = df18['scores_international_outlook']
-income = df18['scores_international_income']
+researchtop = df18['scores_research'].head(n=200)
+citationstop = df18['scores_citations'].head(n=200)
+research = df18['scores_research']
+citations = df18['scores_citations']
 
 # Create a figure
 f = figure()
@@ -35,5 +37,7 @@ f.yaxis.axis_label="score citations"
 
 
 # Plot the line
-f.circle(research, citations)
+
+f.circle(research, citations, color = 'darkcyan')
+f.circle(researchtop, citationstop, color = 'royalblue')
 show(f)
