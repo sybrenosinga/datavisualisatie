@@ -80,7 +80,7 @@ g.y_range=DataRange1d(start=0, end=300000)
 
 # gridplot alle 3 figuren en de widgetbox
 f.plot_width, f.plot_height, h.plot_width, h.plot_height, g.plot_width, g.plot_height = 400,400,400,400,400,400
-l=gridplot([[multi_select_widgetbox,None,None],[f,h,g]])
+l=gridplot([[f,h,g],[multi_select_widgetbox]])
 curdoc().add_root(l)
 
 script = server_document("http://localhost:5006/location")
