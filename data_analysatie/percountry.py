@@ -83,7 +83,7 @@ unidb = unidb.assign(pc_smooth = pc_in_top_smooth)
 output_file('./percountry.html')
 
 # sort database
-unidb_sorted = unidb.sort_values(by=['pc'], ascending = False)
+unidb_sorted = unidb.sort_values(by=['pc'])
 
 # prepare data
 xas=unidb_sorted.country.unique()
@@ -105,6 +105,8 @@ hover = HoverTool(tooltips=[
     ("country", "@locations"),
     ("# top 1000", "@some"),
     ("# alles", "@all"),
+    ("original", "@pc"),
+    ("smooth", "@pc_smooth")
 ])
 
 # p = figure(x_range=xas, plot_width=1800, tools = [hover], plot_height = 500,title="amount of universities in top 1000 / amount of universites in total")
@@ -115,13 +117,14 @@ hover = HoverTool(tooltips=[
 # p.y_range.start = 0
 # p.y_range=DataRange1d(start=0, end=35)
 
-f = figure(x_range=xas, plot_width=1800 , plot_height = 500, tools = [hover],title="percentage of universities in top 1000")
-f.vbar(x='locations', top='pc', legend = 'divided by total universities',line_color= 'black', width=0.85, source=source)
-f.vbar(x='locations', top='pc_smooth', line_color='black', color= '#99ddff', legend = 'divided by total universities + 1', width=0.85, source=source)
+f = figure(y_range=xas, plot_width=900 , plot_height = 3000, tools = [hover],title="percentage of universities in top 1000")
+f.hbar(y='locations', left=0, right='pc', line_color = 'white', color ='#D32F2F', legend = 'divided by total universities',line_color= 'black', height=0.85, source=source)
+f.hbar(y='locations', left=0, right='pc_smooth', line_color='white', color= '#99ddff', legend = 'divided by total universities + 1', height=0.85, source=source)
+f.legend.location='top_left'
 
 f.xgrid.grid_line_color = 'lightgrey'
-f.xaxis.major_label_orientation = 1
-f.y_range.start = 0
-f.y_range=DataRange1d(start=0, end=35)
+# f.xaxis.major_label_orientation = 1
+# f.y_range.start = 0
+# f.y_range=DataRange1d(start=0, end=35)
 
 show(f)
