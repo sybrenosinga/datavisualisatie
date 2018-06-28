@@ -9,6 +9,7 @@ from bokeh.models import DataRange1d
 from bokeh.layouts import column, widgetbox, gridplot
 from bokeh.models.widgets import MultiSelect, Paragraph
 from bokeh.palettes import Spectral6
+from bokeh.embed import components, server_document
 
 import pandas
 
@@ -42,7 +43,7 @@ def update(attrname, old, new):
         h.circle(x = international, y = boiz,color = color_list[0],legend=[uni for uni in multi_select.value])
         g.circle(x= boiz,y=size, color = color_list[0],legend=[uni for uni in multi_select.value])
         color_list = color_list[1:]
-        
+
     # next(color_list)
 
         # myString += '\n' + i
@@ -78,5 +79,9 @@ g.x_range=DataRange1d(start=0, end=100)
 g.y_range=DataRange1d(start=0, end=300000)
 
 # gridplot alle 3 figuren en de widgetbox
+f.plot_width, f.plot_height, h.plot_width, h.plot_height, g.plot_width, g.plot_height = 400,400,400,400,400,400
 l=gridplot([[multi_select_widgetbox,None,None],[f,h,g]])
 curdoc().add_root(l)
+
+script = server_document("http://localhost:5006/location")
+print(script)
